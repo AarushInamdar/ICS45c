@@ -6,11 +6,11 @@ class Stack
 	char buf[STK_MAX];
 
 public:
-	Stack() : _top(-1) {}
+	Stack() : _top(0) {}
 
 	void push(char c){
 		if (! isFull()){
-			buf[_top++] = c;
+			buf[++_top] = c;
 		}	
 	}
 		
@@ -34,12 +34,12 @@ public:
 	}
 
 	bool isEmpty(){
-		return _top == -1;
+		return _top == 0;
 	}
 
 
 	bool isFull(){
-		return _top == STK_MAX-1;
+		return _top == STK_MAX;
 
 }
 };
