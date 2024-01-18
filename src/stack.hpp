@@ -18,6 +18,7 @@ public:
 
 	char pop(){
 		if (! isEmpty()) {
+			_top--;
 			return buf[_top--];
 		
 		} else {
