@@ -19,12 +19,10 @@ public:
 
 	char pop(){
 		if (! isEmpty()) {
-			char res;
-			res = buf[_top];
-			_top--;
-			return res;
+			return buf[_top--];
+		
 		} else {
-			return 'f';
+			return '@';
 		}
 	}
 
