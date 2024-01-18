@@ -6,14 +6,12 @@ class Stack
 	char buf[STK_MAX];
 
 public:
-	Stack();
+	Stack() : _top(0) {}
 
 	void push(char c){
 		if (! isFull()){
 			buf[_top] = c;
 			_top++;
-		} else {
-			cout << "The stack is full" << endl;
 		}
 	}
 		
@@ -26,7 +24,6 @@ public:
 			_top--;
 			return res;
 		} else {
-			cout << "The stack is empty already" << endl;
 			return 'f';
 		}
 	}
@@ -61,10 +58,9 @@ void push_all(Stack & stk, string line){
 void pop_all(Stack & stk)
 {
 	while (! stk.isEmpty()){
-		char c = stk.pop();
-		cout << c;
+		std::cout << stk.pop();
 	}
-	cout << endl;
+	std::cout << std::endl;
 }	
 
 
