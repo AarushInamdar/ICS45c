@@ -10,8 +10,7 @@ public:
 
 	void push(char c){
 		if (! isFull()){
-			buf[_top] = c;
-			_top++;
+			buf[_top++] = c;
 		}
 	}
 		
@@ -28,7 +27,11 @@ public:
 
 
 	char top(){
-		return buf[_top];
+		if (! isEmpty()){
+			return buf[_top];
+		} else {
+			return '@';
+		}
 	}
 
 	bool isEmpty(){
