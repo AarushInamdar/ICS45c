@@ -11,7 +11,7 @@ public:
 	void push(char c){
 		if (! isFull()){
 			buf[_top++] = c;
-		}
+		}	
 	}
 		
 
@@ -40,8 +40,7 @@ public:
 
 
 	bool isFull(){
-		return _top == 1000;
-
+		return _top == STK_MAX;
 
 }
 };
