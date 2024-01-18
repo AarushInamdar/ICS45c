@@ -34,12 +34,12 @@ public:
 	}
 
 	bool isEmpty(){
-		return _top > 0;
+		return _top == 0;
 	}
 
 
 	bool isFull(){
-		return _top < 1000;
+		return _top == 1000;
 
 
 }
