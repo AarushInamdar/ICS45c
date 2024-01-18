@@ -27,7 +27,7 @@ for (char c : str){
 void print_counts(int counts[], int length)
 {
 
-for (int i = 0, i <length, i++) {
+for (int i = 0; i <length; i++) {
 	std::cout << index_to_char(i) << " " << counts[i] << '\n';
 	}
 }
