@@ -18,8 +18,7 @@ public:
 
 	char pop(){
 		if (! isEmpty()) {
-			return buf[_top];
-			top--;
+			return buf[_top--];
 		} else {
 			return '@';
 		}
