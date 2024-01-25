@@ -3,6 +3,7 @@
 #include "word_count.hpp"
 #include "word_count.cpp"
 
+
 int main(){
 	std::ifstream stopwords_file("stopwords.txt");
 	const auto stopwords = load_stopwords(stopwords_file);

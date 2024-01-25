@@ -31,4 +31,4 @@ private:
 std::ostream& operator<<(std::ostream& out, const Coins& coins);
 
 Coins coins_required_for_cents(int amount_in_cents);
-
+#endif
