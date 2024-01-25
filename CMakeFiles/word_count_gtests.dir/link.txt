@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/word_count_gtests.dir/gtest/gtestmain.cpp.o CMakeFiles/word_count_gtests.dir/src/word_count.cpp.o CMakeFiles/word_count_gtests.dir/gtest/word_count_gtests.cpp.o -o word_count_gtests  /usr/lib/x86_64-linux-gnu/libgtest.a 

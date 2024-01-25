@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/coins_transfer.dir/src/coins.cpp.o CMakeFiles/coins_transfer.dir/src/coins_transfer.cpp.o -o coins_transfer 

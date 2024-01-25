@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/coins_gtests.dir/gtest/gtestmain.cpp.o CMakeFiles/coins_gtests.dir/src/coins.cpp.o CMakeFiles/coins_gtests.dir/gtest/coins_gtests.cpp.o -o coins_gtests  /usr/lib/x86_64-linux-gnu/libgtest.a 

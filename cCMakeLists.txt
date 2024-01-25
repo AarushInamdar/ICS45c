@@ -1,0 +1,3 @@
+project(MyProject)
+add_subdirectory(src)
+
