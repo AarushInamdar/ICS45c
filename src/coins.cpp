@@ -3,8 +3,12 @@
 
 using namespace std;
 
-Coins::Coins(int q, int d, int n, int p)
-	: quarters(q), dimes(d), nickels(n), pennies(p){}
+Coins::Coins(int q, int d, int n, int p){
+	quarters = q;
+	dimes = d;
+	nickels = n;
+	pennies = p;
+}
 
 
 ostream Coins :: ostream & operator << (ostream &out, const Coins& coin_count) {
@@ -170,4 +174,3 @@ void coins_menu(std:: istream& in, std::ostream& out) {
 		
 }
 
-#endif
