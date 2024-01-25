@@ -1,0 +1,2 @@
+/home/inamdara/ICS45c/src/CMakeFiles/edit_cache.dir
+/home/inamdara/ICS45c/src/CMakeFiles/rebuild_cache.dir
