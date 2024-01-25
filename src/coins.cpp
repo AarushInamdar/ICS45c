@@ -11,8 +11,8 @@ Coins::Coins(int q, int d, int n, int p){
 }
 
 
-ostream Coins :: ostream & operator << (ostream &out, const Coins& coin_count) {
-	out << coin_count.q << " quarters, " << coin_count.d << " dimes, " << coin_count.n << " nickels, " << coin_count.p << " pennies ";
+ostream& operator<<(ostream& out, const Coins& coin_count) {
+	out << coin_count.quarters<< " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
 
 	return out;
 }

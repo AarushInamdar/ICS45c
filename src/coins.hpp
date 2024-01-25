@@ -1,4 +1,4 @@
-#ifdef COINS_HPP
+#ifndef COINS_HPP
 #define COINS_HPP
 
 #include <iosfwd>

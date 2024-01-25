@@ -1,4 +1,4 @@
-#ifdef WORD_COUNT_HPP
+#ifndef WORD_COUNT_HPP
 #define WORD_COUNT_HPP
 
 #include <iosfwd>
