@@ -9,7 +9,7 @@ void to_lowercase(std::string& str) {
 
 }
 
-std::set<std::string> load_stopwords(std::isteram& stopwords_stream) {
+std::set<std::string> load_stopwords(std::istream& stopwords_stream) {
 
 	std::set<std::string> stopwords;
 	std::string word;
