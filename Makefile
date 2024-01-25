@@ -194,6 +194,19 @@ coins_gtests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/coins_gtests.dir/build.make CMakeFiles/coins_gtests.dir/build
 .PHONY : coins_gtests/fast
 
+#=============================================================================
+# Target rules for targets named student_gtests
+
+# Build rule for target.
+student_gtests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 student_gtests
+.PHONY : student_gtests
+
+# fast build rule for target.
+student_gtests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/build
+.PHONY : student_gtests/fast
+
 gtest/coins_gtests.o: gtest/coins_gtests.cpp.o
 .PHONY : gtest/coins_gtests.o
 
@@ -225,6 +238,7 @@ gtest/gtestmain.o: gtest/gtestmain.cpp.o
 gtest/gtestmain.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/gtest/gtestmain.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/coins_gtests.dir/build.make CMakeFiles/coins_gtests.dir/gtest/gtestmain.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/gtest/gtestmain.cpp.o
 .PHONY : gtest/gtestmain.cpp.o
 
 gtest/gtestmain.i: gtest/gtestmain.cpp.i
@@ -234,6 +248,7 @@ gtest/gtestmain.i: gtest/gtestmain.cpp.i
 gtest/gtestmain.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/gtest/gtestmain.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/coins_gtests.dir/build.make CMakeFiles/coins_gtests.dir/gtest/gtestmain.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/gtest/gtestmain.cpp.i
 .PHONY : gtest/gtestmain.cpp.i
 
 gtest/gtestmain.s: gtest/gtestmain.cpp.s
@@ -243,6 +258,7 @@ gtest/gtestmain.s: gtest/gtestmain.cpp.s
 gtest/gtestmain.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/gtest/gtestmain.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/coins_gtests.dir/build.make CMakeFiles/coins_gtests.dir/gtest/gtestmain.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/gtest/gtestmain.cpp.s
 .PHONY : gtest/gtestmain.cpp.s
 
 gtest/word_count_gtests.o: gtest/word_count_gtests.cpp.o
@@ -374,6 +390,30 @@ src/coins_transfer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/coins_transfer.dir/build.make CMakeFiles/coins_transfer.dir/src/coins_transfer.cpp.s
 .PHONY : src/coins_transfer.cpp.s
 
+src/student_gtests.o: src/student_gtests.cpp.o
+.PHONY : src/student_gtests.o
+
+# target to build an object file
+src/student_gtests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/student_gtests.cpp.o
+.PHONY : src/student_gtests.cpp.o
+
+src/student_gtests.i: src/student_gtests.cpp.i
+.PHONY : src/student_gtests.i
+
+# target to preprocess a source file
+src/student_gtests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/student_gtests.cpp.i
+.PHONY : src/student_gtests.cpp.i
+
+src/student_gtests.s: src/student_gtests.cpp.s
+.PHONY : src/student_gtests.s
+
+# target to generate assembly for a file
+src/student_gtests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/student_gtests.cpp.s
+.PHONY : src/student_gtests.cpp.s
+
 src/word_count.o: src/word_count.cpp.o
 .PHONY : src/word_count.o
 
@@ -381,6 +421,7 @@ src/word_count.o: src/word_count.cpp.o
 src/word_count.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count.dir/build.make CMakeFiles/word_count.dir/src/word_count.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/src/word_count.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/word_count.cpp.o
 .PHONY : src/word_count.cpp.o
 
 src/word_count.i: src/word_count.cpp.i
@@ -390,6 +431,7 @@ src/word_count.i: src/word_count.cpp.i
 src/word_count.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count.dir/build.make CMakeFiles/word_count.dir/src/word_count.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/src/word_count.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/word_count.cpp.i
 .PHONY : src/word_count.cpp.i
 
 src/word_count.s: src/word_count.cpp.s
@@ -399,6 +441,7 @@ src/word_count.s: src/word_count.cpp.s
 src/word_count.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count.dir/build.make CMakeFiles/word_count.dir/src/word_count.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/word_count_gtests.dir/build.make CMakeFiles/word_count_gtests.dir/src/word_count.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/student_gtests.dir/build.make CMakeFiles/student_gtests.dir/src/word_count.cpp.s
 .PHONY : src/word_count.cpp.s
 
 src/word_count_main.o: src/word_count_main.cpp.o
@@ -437,6 +480,7 @@ help:
 	@echo "... coins_menu"
 	@echo "... coins_simple"
 	@echo "... coins_transfer"
+	@echo "... student_gtests"
 	@echo "... word_count"
 	@echo "... word_count_gtests"
 	@echo "... gtest/coins_gtests.o"
@@ -460,6 +504,9 @@ help:
 	@echo "... src/coins_transfer.o"
 	@echo "... src/coins_transfer.i"
 	@echo "... src/coins_transfer.s"
+	@echo "... src/student_gtests.o"
+	@echo "... src/student_gtests.i"
+	@echo "... src/student_gtests.s"
 	@echo "... src/word_count.o"
 	@echo "... src/word_count.i"
 	@echo "... src/word_count.s"

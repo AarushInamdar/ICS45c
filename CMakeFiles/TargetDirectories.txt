@@ -4,5 +4,6 @@
 /home/inamdara/ICS45c/CMakeFiles/coins_transfer.dir
 /home/inamdara/ICS45c/CMakeFiles/word_count_gtests.dir
 /home/inamdara/ICS45c/CMakeFiles/coins_gtests.dir
+/home/inamdara/ICS45c/CMakeFiles/student_gtests.dir
 /home/inamdara/ICS45c/CMakeFiles/edit_cache.dir
 /home/inamdara/ICS45c/CMakeFiles/rebuild_cache.dir

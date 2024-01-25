@@ -61,4 +61,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/coins_transfer.dir/DependInfo.cmake"
   "CMakeFiles/word_count_gtests.dir/DependInfo.cmake"
   "CMakeFiles/coins_gtests.dir/DependInfo.cmake"
+  "CMakeFiles/student_gtests.dir/DependInfo.cmake"
   )

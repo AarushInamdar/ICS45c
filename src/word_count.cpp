@@ -3,6 +3,11 @@
 #include <algorithm>
 #include <cctype>
 #include <sstream>
+#include <set>
+#include <map>
+
+
+
 
 void to_lowercase(std::string& str) {
 	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::tolower(c); });
@@ -16,7 +21,7 @@ std::set<std::string> load_stopwords(std::istream& stopwords_stream) {
 
 	while (stopwords_stream >> word){
 		to_lowercase(word);
-		stopwords.inset(word);
+		stopwords.insert(word);
 	}
 	return stopwords;
 }
@@ -34,7 +39,7 @@ std::map<std::string, int> count_words(std::istream& document, const std::set<st
 }
 
 void output_word_counts(const std::map<std::string, int>& word_counts, std::ostream& output) {
-	for (const auto& pair : word_counts {
-		output << pair.first << " " << pairsecond << "\n";
+	for (const auto& pair : word_counts) {
+		output << pair.first << " " << pair.second << "\n";
 	}
 }
