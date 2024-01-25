@@ -1,12 +1,10 @@
 #include <fstream>
-
 #include "word_count.hpp"
-#include "word_count.cpp"
-
+#include <set>
 
 int main(){
 	std::ifstream stopwords_file("stopwords.txt");
-	const auto stopwords = load_stopwords(stopwords_file);
+	const std::set<std::string> stopwords = load_stopwords(stopwords_file);
 
 	std::ifstream document("sample_doc.txt");
 	const auto word_counts= count_words(document, stopwords);

@@ -1,5 +1,5 @@
-#include "coins.hpp"
 #include <iostream>
+#include "coins.hpp"
 
 using namespace std;
 
@@ -98,8 +98,6 @@ void print_cents(int cents, std::ostream& out) {
 }
 
 Coins ask_for_cents(std::istream& in, std::ostream& out) {
-	
-
 	int q, d, n, p;
 
 	out << "Quarters? ";
