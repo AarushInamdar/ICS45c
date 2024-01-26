@@ -29,6 +29,7 @@ private:
 
 std::ostream& operator<<(std::ostream& out, const Coins& coin);
 
+Coins ask_for_coins(std::istream& in, std::ostream& out);
 
 void print_cents(int cents, std::ostream& out);
 
