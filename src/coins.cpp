@@ -94,19 +94,19 @@ Coins ask_for_cents(std::istream& in, std::ostream& out) {
 
 	out << "Quarters? ";
 	in >> q;
-	out << endl;
+	out.flush();
 	
-	out << "Dimes? ";
+	out << "\nDimes? ";
 	in >> d;
-	out << endl;
+	out.flush();
 	
-	out << "Nickels? ";
+	out << "\nNickels? ";
 	in >> n;
-	out << endl;
+	out.flush();
 
-	out << "Pennies? ";
+	out << "\nPennies? ";
 	in >> p;
-	out << endl;
+	out.flush();
 
 	return Coins(q, d, n, p);
 
@@ -146,7 +146,7 @@ void coins_menu(std:: istream& in, std::ostream& out) {
 			if (bank.has_exact_change_for_coins(remove_coin)) {
 				
 				
-				bank.extract_exact_change(remove_coin);
+				bank = bank.extract_exact_change(remove_coin);
 				out << "\nThank you!" << endl;
 				out << "\n";
 			} else {
