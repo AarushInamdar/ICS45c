@@ -12,76 +12,81 @@ Coins::Coins(int q, int d, int n, int p){
 
 
 ostream& operator<<(ostream& out, const Coins& coin_count) {
-	out << coin_count.quarters<< " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
+	out << coin_count.quarters << " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
 
 	return out;
 }
 
 void Coins :: deposit_coins(Coins& coins) {
-	Coins.quarters += coins.quarters;
-	Coins.dimes += coins.dimes;
-	Coins.nickels += coins.nickels;
-	Coins.pennies += coins.pennies;
+	this->quarters += coins.quarters;
+	this->dimes += coins.dimes;
+	this->nickels += coins.nickels;
+	this->pennies += coins.pennies;
 
 	coins.quarters = coins.dimes = coins.nickels = coins.pennies = 0;
 	
 }
 
 bool Coins :: has_exact_change_for_coins(const Coins& coins) const {
+	int transaction_amount, remaining_value;
+
 	transaction_amount = coins.quarters*CENTS_PER_QUARTER + coins.dimes*CENTS_PER_DIME + coins.nickels*CENTS_PER_NICKEL + coins.pennies;
 
-	remaining_value = transaction_amount % Coins.quarters;
-	remaining_value = remaining_value % Coins.dimes;
-	remaining_value = remaining_value % Coins.nickels;
-	remaining_value = remaining_value % Coins.pennies;
+	remaining_value = transaction_amount % this->quarters;
+	remaining_value = remaining_value % this->dimes;
+	remaining_value = remaining_value % this->nickels;
+	remaining_value = remaining_value % this->pennies;
 
 	return remaining_value == 0;
 
 
 }
 
-Coins Coins ::  extract_exact_change(const Coins& coins) const; {
-	Coins.quarters -= coins.quarters;
-	Coins.dimes -= coins.dimes;
-	Coins.nickels -= coins.nickels;
-	Coins.pennies -= coins.pennies;
+Coins Coins::extract_exact_change(const Coins& coins) const {
+	Coin result;
 
-	return Coins	
+	result.quarters = this->quarters - coins.quarters;
+	result.dimes = this->dimes - coins.dimes;
+	result.nickels = this->nickels - coins.nickels;
+	result.pennies = this->pennies - coins.pennies;
+
+	return result;	
 
 }
 
 int Coins :: total_value_in_cents() const {
-	result  = Coins.quarters*CENTS_PER_QUARTER + Coins.dimes*CENTS_PER_DIME + Coins.nickels*CENTS_PER_NICKEL + Coins.pennies;
+	result  = this->quarters*CENTS_PER_QUARTER + this->dimes*CENTS_PER_DIME + this->nickels*CENTS_PER_NICKEL + this->pennies;
 	return result;
 }
 
 void Coins :: print(std::ostream& out) const {
-	cout << coins.quarters << " quarters, " << coins.dimes << " dimes, " << coins.nickels << " nickels, " << coins.pennies << " pennies";
+	cout << this->quarters << " quarters, " << this->dimes << " dimes, " << this->nickels << " nickels, " << this->pennies << " pennies";
 
 
 }
 
 bool Coins :: operator==(const Coins& other) const=default {
-	return quarters==coins.quarters && dimes==coins.dimes && nickels == coins.nickels && pennies == coins.pennies;
+	return this->quarters==other.quarters && this->dimes==other.dimes && this->nickels == other.nickels && this->pennies == other.pennies;
 }
 
 Coins coins_required_for_cents(int amount_in_cents) {
 	Coins required(0,0,0,0);
 
+	int quarters, dimes, nickels, pennies;
 	int remaining_amount = amount_in_cents;
 	
-	required.quarters += remaining_amount / quarters;
-	remaining_amount = remaining_amount%(quarters*CENTS_PER_QUARTER);
+	required.quarters += remaining_amount / CENTS_PER_QUARTER;
+	remaining_amount = remaining_amount%(required.quarters*CENTS_PER_QUARTER);
 	
 
-	required.dimes += remaining_amount / dimes;
-	remaining_amount = remaining_amount%(quarters*CENTS_PER_DIME);
+	required.dimes += remaining_amount / CENTS_PER_DIME;
+	remaining_amount = remaining_amount%(required.dimes*CENTS_PER_DIME);
 	
-	required.nickels += remaining_amount / nickels;
-	remaining_amount = remaining_amount%(quarters*CENTS_PER_NICKEL);
+	required.nickels += remaining_amount / CENTS_PER_NICKEL;
+	remaining_amount = remaining_amount%(required.nickels*CENTS_PER_NICKEL);
 	
-	required.pennies += remaining_amount / pennies;
-	remaining_amount = remaining_amount%(pennies);
+	required.pennies += remaining_amount;
+	remaining_amount = 0 ;
 
 	return required;
 
@@ -123,8 +128,9 @@ Coins ask_for_cents(std::istream& in, std::ostream& out) {
 }
 
 void coins_menu(std:: istream& in, std::ostream& out) {
-	bool continue = true;
-	while(continue){
+	bool cont = true;
+	while(cont);
+	{
 	out << "Coins Menu" << endl;
 	out << "\n";
 	
@@ -150,19 +156,21 @@ void coins_menu(std:: istream& in, std::ostream& out) {
 		Coin remove_coin;
 		remove_coin = ask_for_cents(in, out);
 		extract_exact_change(remove_coin);
-		if(Coins.quarters < 0 || Coins.dimes < 0 || Coins.nickels < 0 || Coins.pennies < 0){
+		if(this->quarters < 0 || this->dimes < 0 || this->nickels < 0 || this->pennies < 0){
 			out << "ERROR: Insufficient Funds" << endl;
 			out << "\n";
 			deposit_coins(remove_coin);
 		}
 	
 	} else if (option == 3) {
-		out << print_cents(total_value_in_cents(), out) << endl;
+		int current_value = total_value_in_cents();
+
+		out << print_cents(current_value, out) << endl;
 		out << "\n" << endl;
 		out << "Thank You!" <<endl;
 	
 	} else if (option == 4) {
-		continue = false;
+		cont = false;
 	
 	} else {
 		out << "ERROR: Invalid Command" << endl;

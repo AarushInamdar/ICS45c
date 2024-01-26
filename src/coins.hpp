@@ -24,10 +24,7 @@ public:
 	bool operator==(const Coins& other) const = default;
 
 private:
-	int quarters;
-	int nickels;
-	int dimes;
-	int pennies;
+	int quarters, nickels, dimes, pennies;
 };
 
 std::ostream& operator<<(std::ostream& out, const Coins& coins);
