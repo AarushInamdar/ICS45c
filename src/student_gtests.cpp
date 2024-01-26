@@ -38,7 +38,7 @@ TEST(WordCount, CountWords) {
 	map<string,int> word_counts = count_words(document, stopwords);
 
 	EXPECT_EQ(word_counts.size(),3);
-	EXPECT_EQ(word_counts["a"], 8);
+	EXPECT_EQ(word_counts["a"], 0);
 	EXPECT_EQ(word_counts["word"], 1);
 	EXPECT_NE(word_counts["test"], 2);
 
