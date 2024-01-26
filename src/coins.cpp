@@ -94,19 +94,15 @@ Coins ask_for_cents(std::istream& in, std::ostream& out) {
 
 	out << "Quarters? ";
 	in >> q;
-	out.flush();
 	
 	out << "\nDimes? ";
 	in >> d;
-	out.flush();
 	
 	out << "\nNickels? ";
 	in >> n;
-	out.flush();
 
 	out << "\nPennies? ";
 	in >> p;
-	out.flush();
 
 	return Coins(q, d, n, p);
 
