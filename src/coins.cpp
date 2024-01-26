@@ -130,7 +130,7 @@ void coins_menu(std:: istream& in, std::ostream& out) {
 
 		if (option == 1) {
 			
-			Coins current_coins = ask_for_cents(in, out);
+			Coins current_coins = ask_for_coins(in, out);
 			bank.deposit_coins(current_coins);
 
 		out << "\nThank you!" << endl;
@@ -138,7 +138,7 @@ void coins_menu(std:: istream& in, std::ostream& out) {
 
 		
 		} else if (option == 2) {
-			Coins remove_coin = ask_for_cents(in, out);
+			Coins remove_coin = ask_for_coins(in, out);
 			if (bank.has_exact_change_for_coins(remove_coin)) {
 				
 				
