@@ -7,96 +7,85 @@ Coins::Coins(int q, int d, int n, int p) : quarters(q), dimes(d), nickels(n), pe
 
 
 
-void Coins :: deposit_coins(Coins& coins) {
-	this->quarters += coins.quarters;
-	this->dimes += coins.dimes;
-	this->nickels += coins.nickels;
-	this->pennies += coins.pennies;
+void Coins::deposit_coins(Coins& coins) {
+	quarters += coins.quarters;
+	dimes += coins.dimes;
+	nickels += coins.nickels;
+	pennies += coins.pennies;
 
 	coins.quarters = coins.dimes = coins.nickels = coins.pennies = 0;
 	
 }
 
-bool Coins :: has_exact_change_for_coins(const Coins& coins) const {
-	int transaction_amount, remaining_value;
-
-	transaction_amount = coins.quarters*CENTS_PER_QUARTER + coins.dimes*CENTS_PER_DIME + coins.nickels*CENTS_PER_NICKEL + coins.pennies;
-
-	remaining_value = transaction_amount % this->quarters;
-	remaining_value = remaining_value % this->dimes;
-	remaining_value = remaining_value % this->nickels;
-	remaining_value = remaining_value % this->pennies;
-
-	return remaining_value == 0;
-
-
+bool Coins::has_exact_change_for_coins(const Coins& coins) const {
+	return quarters >= coins.quarters && dimes >= coins.dimes && nickels >= coins.nickels && pennies >= coins.pennies;
 }
 
 Coins Coins::extract_exact_change(const Coins& coins) const {
-	Coin result;
+	if (!has_exact_change_for_coins(coins)){
+		return Coins(0,0,0,0);
+	}
 
-	result.quarters = this->quarters - coins.quarters;
-	result.dimes = this->dimes - coins.dimes;
-	result.nickels = this->nickels - coins.nickels;
-	result.pennies = this->pennies - coins.pennies;
+	int q, d, n, p;
+	q = quarters - coins.quarters;
+	d = dimes - coins.dimes;
+	n = nickels - coins.nickels;
+	p = pennies - coins.pennies;
 
-	return result;	
+	return Coins(q,d,n,p);	
 
 }
 
-int Coins :: total_value_in_cents() const {
-	result  = this->quarters*CENTS_PER_QUARTER + this->dimes*CENTS_PER_DIME + this->nickels*CENTS_PER_NICKEL + this->pennies;
+int Coins::total_value_in_cents() const {
+	int result  = quarters*CENTS_PER_QUARTER + dimes*CENTS_PER_DIME + nickels*CENTS_PER_NICKEL + pennies;
 	return result;
 }
 
-void Coins :: print(std::ostream& out) const {
-	cout << this->quarters << " quarters, " << this->dimes << " dimes, " << this->nickels << " nickels, " << this->pennies << " pennies";
+void Coins::print(std::ostream& out) const {
+	out << quarters << " quarters, " << dimes << " dimes, " << nickels << " nickels, " << pennies << " pennies";
 
-
-}
-
-bool Coins :: operator==(const Coins& other) const=default {
-	return this->quarters==other.quarters && this->dimes==other.dimes && this->nickels == other.nickels && this->pennies == other.pennies;
 }
 
 
 ostream& operator<<(ostream& out, const Coins& coin_count) {
-	out << coin_count.quarters << " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
-
+	coin_count.print(out);	
 	return out;
 }
 
 
 
 Coins coins_required_for_cents(int amount_in_cents) {
-	Coins required(0,0,0,0);
+	
 
-	int quarters, dimes, nickels, pennies;
+	int q, d, n, p;
 	int remaining_amount = amount_in_cents;
 	
-	required.quarters += remaining_amount / CENTS_PER_QUARTER;
-	remaining_amount = remaining_amount%(required.quarters*CENTS_PER_QUARTER);
+	q = remaining_amount / CENTS_PER_QUARTER;
+	remaining_amount = remaining_amount%(q*CENTS_PER_QUARTER);
 	
 
-	required.dimes += remaining_amount / CENTS_PER_DIME;
-	remaining_amount = remaining_amount%(required.dimes*CENTS_PER_DIME);
+	d = remaining_amount / CENTS_PER_DIME;
+	remaining_amount = remaining_amount%(d*CENTS_PER_DIME);
 	
-	required.nickels += remaining_amount / CENTS_PER_NICKEL;
-	remaining_amount = remaining_amount%(required.nickels*CENTS_PER_NICKEL);
+	n = remaining_amount / CENTS_PER_NICKEL;
+	remaining_amount = remaining_amount%(n*CENTS_PER_NICKEL);
 	
-	required.pennies += remaining_amount;
+	p = remaining_amount;
 	remaining_amount = 0 ;
-
-	return required;
+	
+	return Coins(q,d,n,p);
 
 	}
-
-}
-
 void print_cents(int cents, std::ostream& out) {
-	double value = cents/double(100.0);
+	int dollars = cents / 100;
+	int remainingCents = cents%100;
 
-	out << "$" << value << endl;
+	out << "$" << dollars << ".";
+	if (remainingCents < 10){
+		out << '0';
+	}
+	out << remainingCents;
+	out.flush();
 	
 }
 
@@ -125,54 +114,58 @@ Coins ask_for_cents(std::istream& in, std::ostream& out) {
 
 void coins_menu(std:: istream& in, std::ostream& out) {
 	bool cont = true;
-	while(cont);
-	{
-	out << "Coins Menu" << endl;
-	out << "\n";
-	
-	out << "1. Deposit Change" << endl;
-	out << "2. Extract Change" << endl;
-	out << "3. Print Balance" << endl;
-	out << "4. Exit" << endl;
-	out << "\n";
-	out << "User input: ";
-	
-	int option;
-	in >> option;
+	Coins bank(0,0,0,0);
 
-	out << "\nThank you!" << endl;
-	out << "\n";
-
-
-	if (option == 1) {
-		Coin current_coins;
-		current_coins = ask_for_cents(in, out);
-	
-	} else if (option == 2) {
-		Coin remove_coin;
-		remove_coin = ask_for_cents(in, out);
-		extract_exact_change(remove_coin);
-		if(this->quarters < 0 || this->dimes < 0 || this->nickels < 0 || this->pennies < 0){
-			out << "ERROR: Insufficient Funds" << endl;
-			out << "\n";
-			deposit_coins(remove_coin);
-		}
-	
-	} else if (option == 3) {
-		int current_value = total_value_in_cents();
-
-		out << print_cents(current_value, out) << endl;
-		out << "\n" << endl;
-		out << "Thank You!" <<endl;
-	
-	} else if (option == 4) {
-		cont = false;
-	
-	} else {
-		out << "ERROR: Invalid Command" << endl;
+	while(cont) {
+		out << "Coins Menu" << endl;
 		out << "\n";
-	}
-	}
 		
+		out << "1. Deposit Change" << endl;
+		out << "2. Extract Change" << endl;
+		out << "3. Print Balance" << endl;
+		out << "4. Exit" << endl;
+		out << "\n";
+		out << "User input: ";
+		
+		int option;
+		in >> option;
+
+		
+
+		if (option == 1) {
+			
+			Coins current_coins = ask_for_cents(in, out);
+			bank.deposit_coins(current_coins);
+
+		out << "\nThank you!" << endl;
+		out << "\n";
+
+		
+		} else if (option == 2) {
+			Coins remove_coin = ask_for_cents(in, out);
+			if (bank.has_exact_change_for_coins(remove_coin)) {
+				
+				
+				bank.extract_exact_change(remove_coin);
+				out << "\nThank you!" << endl;
+				out << "\n";
+			} else {
+				out << "ERROR: Insufficient Funds\n" << endl;
+			}			
+		} else if (option == 3) {
+			int current_value = bank.total_value_in_cents();
+
+			print_cents(current_value, out);
+			
+			out << "\n\nThank You!\n" <<endl;
+		
+		} else if (option == 4) {
+			cont = false;
+		
+		} else {
+			out << "ERROR: Invalid Command" << endl;
+			out << "\n";
+		}
+	}
 }
 
