@@ -89,7 +89,7 @@ void print_cents(int cents, std::ostream& out) {
 	
 }
 
-Coins ask_for_cents(std::istream& in, std::ostream& out) {
+Coins ask_for_coins(std::istream& in, std::ostream& out) {
 	int q, d, n, p;
 
 	out << "Quarters? ";
