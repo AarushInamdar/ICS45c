@@ -27,7 +27,7 @@ TEST(WordCount, LoadStopWords) {
 	set<std::string> stopwords = load_stopwords(stopwords_stream);
 	EXPECT_EQ(stopwords.size(), 3);
 	EXPECT_NE(stopwords.size(), 222);
-	
+	EXPECT_TRUE(stopwords.find("a") != stopwords.end());	
 	EXPECT_TRUE(stopwords.find("and") == stopwords.end());
 }
 
