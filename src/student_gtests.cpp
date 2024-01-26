@@ -41,6 +41,7 @@ TEST(WordCount, CountWords) {
 	EXPECT_EQ(word_counts["a"], 0);
 	EXPECT_NE(word_counts["word"], 22);
 	EXPECT_EQ(word_counts["test"], 2);
+	EXPECT_EQ(word_counts["document"], 1);
 
 }
 
