@@ -1,8 +1,6 @@
 #include <iostream>
 using namespace std;
 #include "coins.hpp"
-#include "coins.cpp"
-
 
 int main() {
 	Coins piggyBank(50, 50, 50, 50);
@@ -27,7 +25,11 @@ int main() {
 	cout << "Pocket: " << pocket << endl;
 	cout << "Piggy Bank: " << piggyBank << endl;
 
-	cout << "Piggy Bank Total: " << print_cents(total_value_in_cents(piggyBank), cout) << endl;
-	
+	cout << "Piggy Bank Total: ";
+	print_cents(piggyBank.total_value_in_cents(), cout);
+	cout << endl;
+
+	return 0;
+	}
 	
 
