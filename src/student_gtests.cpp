@@ -32,7 +32,7 @@ TEST(WordCount, LoadStopWords) {
 }
 
 TEST(WordCount, CountWords) {
-	istringstream document("a test document with a TEST word");
+	istringstream document("a test document with a TET word");
 	set<string> stopwords = {"a", "with"};
 
 	map<string,int> word_counts = count_words(document, stopwords);
