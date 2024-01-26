@@ -51,8 +51,8 @@ TEST(WordCount, OutputWordCounts) {
 
 	output_word_counts(word_counts, output_stream);
 
-	string expected_output = "test 2\nword1\n";
-	string incorrect_output = "test 2 word1";
+	string expected_output = "test 2\nword 1\n";
+	string incorrect_output = "test 2 word 1";
 
 	EXPECT_EQ(output_stream.str(), expected_output);
 	EXPECT_NE(output_stream.str(), incorrect_output);
