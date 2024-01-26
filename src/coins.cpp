@@ -3,19 +3,9 @@
 
 using namespace std;
 
-Coins::Coins(int q, int d, int n, int p){
-	quarters = q;
-	dimes = d;
-	nickels = n;
-	pennies = p;
-}
+Coins::Coins(int q, int d, int n, int p) : quarters(q), dimes(d), nickels(n), pennies(p) {}
 
 
-ostream& operator<<(ostream& out, const Coins& coin_count) {
-	out << coin_count.quarters << " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
-
-	return out;
-}
 
 void Coins :: deposit_coins(Coins& coins) {
 	this->quarters += coins.quarters;
@@ -69,6 +59,15 @@ bool Coins :: operator==(const Coins& other) const=default {
 	return this->quarters==other.quarters && this->dimes==other.dimes && this->nickels == other.nickels && this->pennies == other.pennies;
 }
 
+
+ostream& operator<<(ostream& out, const Coins& coin_count) {
+	out << coin_count.quarters << " quarters, " << coin_count.dimes << " dimes, " << coin_count.nickels << " nickels, " << coin_count.pennies << " pennies ";
+
+	return out;
+}
+
+
+
 Coins coins_required_for_cents(int amount_in_cents) {
 	Coins required(0,0,0,0);
 
@@ -98,7 +97,6 @@ void print_cents(int cents, std::ostream& out) {
 	double value = cents/double(100.0);
 
 	out << "$" << value << endl;
-
 	
 }
 
@@ -121,9 +119,7 @@ Coins ask_for_cents(std::istream& in, std::ostream& out) {
 	in >> p;
 	out << endl;
 
-	Coins coinn(q, d, n, p);
-
-	return coinn;
+	return Coins(q, d, n, p);
 
 }
 

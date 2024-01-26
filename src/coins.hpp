@@ -27,7 +27,9 @@ private:
 	int quarters, nickels, dimes, pennies;
 };
 
-std::ostream& operator<<(std::ostream& out, const Coins& coins);
+std::ostream& operator<<(std::ostream& out, const Coins& coin);
+
+};
 
 Coins coins_required_for_cents(int amount_in_cents);
 #endif
