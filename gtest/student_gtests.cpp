@@ -47,7 +47,7 @@ TEST(StringFunction, strcmp) {
 	
 	String::strcpy(man, "foa");
 	int value = String::strcmp(result, man); 
-	EXPECT_EQ(value, 1);
+	EXPECT_EQ(value, 14);
 
 	String::strcpy(man, "foo");
 	value = String::strcmp(result, man); 
@@ -55,11 +55,26 @@ TEST(StringFunction, strcmp) {
 
 	String::strcpy(man, "foy");
 	value = String::strcmp(result, man); 
-	EXPECT_EQ(value, -1);
+	EXPECT_EQ(value, -10);
 }
 
 TEST(StringFunction, strncmp) {
-   
+   char result[10];
+    char man[10];
+	String::strncpy(result, "foo", MAXLEN);
+	
+	String::strncpy(man, "foa", MAXLEN);
+	int value = String::strcmp(result, man); 
+	EXPECT_EQ(value, 14);
+
+	String::strncpy(man, "foo", MAXLEN);
+	value = String::strcmp(result, man); 
+	EXPECT_EQ(value, 0);
+
+	String::strncpy(man, "foy", MAXLEN);
+	value = String::strcmp(result, man); 
+	EXPECT_EQ(value, -10);
+
 }
 
 TEST(StringFunction, reverse_cpy) {
@@ -82,9 +97,26 @@ TEST(StringFunction, reverse_cpy) {
 }
 
 TEST(StringFunction, strchr) {
-    EXPECT_TRUE(false);
+    char str[] = "sample";
+	char * look;
+
+	look = strchr(str, 'p');
+
+	EXPECT_EQ(look-str+1, 3);
+
+	look = strstr(str, "z");
+	EXPECT_EQ(look-str+1, -1);
+
 }
 
 TEST(StringFunction, strstr) {
-    EXPECT_TRUE(false);
+    char str[] = "sample";
+	char * look;
+
+	look = strstr(str, "pl");
+
+	EXPECT_EQ(look-str+1, 3);
+
+	look = strstr(str, "zz");
+	EXPECT_EQ(look-str+1, -1);
 }

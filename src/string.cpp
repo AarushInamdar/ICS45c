@@ -13,7 +13,6 @@ String::String(const char *s) {
 
 String::String(const String &s) {
 	strncpy(buf, s.buf, MAXLEN-1);
-
 }
 
 String &String::operator=(const String &s) {
@@ -79,11 +78,11 @@ char *String::strncat(char *dest, const char*src, int n) {
 	return dest;
 }
 
-int strcmp(const char *left, const char *right) {
+int String::strcmp(const char *left, const char *right) {
 	int i = 0;
 	for (i=0;(left[i] != '\0' && right[i] != '\0'); ++i) {
 		if (left[i] != right[i]) {
-			int res = (left[i] > right[i]) ? 1 : -1;
+			int res = (left[i] > right[i]) ? (left[i]-right[i]) : (left[i]-right[i]);
 			return res;
 		}
 	}
@@ -94,7 +93,7 @@ int String::strncmp(const char *left, const char *right, int n) {
 	int i = 0;
 	for (i=0;left[i] != '\0' && right[i] != '\0' && i < n; ++i) {
 		if (left[i] != right[i]) {
-			int res = (left[i] > right[i]) ? 1 : -1;
+			int res = (left[i] > right[i]) ? (left[i]-right[i]) : (left[i]-right[i]);
 			return res;
 		}
 	}
@@ -115,23 +114,43 @@ void String::reverse_cpy(char *dest, const char *src) {
 }
 
 const char *String::strchr(const char *str, char c) {
-		int len = strlen(str);
+		
+		if (str == nullptr) {
+			return nullptr;
+		}
 
-		for (int i=0;(str[i] != '\0' && i < len); ++i) {
-			if (str[i]==c) {
-				return c;
+		do {
+			if (*str ==c) {
+				return str;
 			}
+		} while (*str++);
+
 		return nullptr;
-	}
+}
 
 
 
 const char *String::strstr(const char *haystack, const char *needle) {
-	int len = strlen(needle);
-	for (char *p = haystack; (p=strchr(p,needle[0]); ++p) {
-		if(strncmp(p,needle,len) == 0) {
-			return p;
+	
+
+	if (!needle || !*needle) {
+		return nullptr;
+	}
+
+	while (*haystack) {
+		const char *h = haystack;
+		const char *n = needle;
+
+		while (*n && *h && *h == *n) {
+			++h;
+			++n;
 		}
+		if (!*n) {
+			return haystack;
+		}
+
+		++haystack;
+	}
 	return nullptr;
 }
 
@@ -147,36 +166,44 @@ String String::reverse() {
 }
 
 int String::indexOf(const String &s) {
-	
+	/*char *p = strstr(buf, s);
+	if (p!=nullptr){
+		return p-buf;
+	} else {
+		return -1;
+	}*/
 }
 
 bool String::operator==(const String &s) const {
-	
+	//return (strncmp(this, s) == 0);
 }
 
 bool String::operator!=(const String &s) const{
-	
+	//return (strncmp(buf,s.buf) != 0);
 }
 
 bool String::operator>(const String &s) const{
-	
+	//return (strncmp(buf, s.buf) > 0);
 }
 
 bool String::operator<(const String &s) const{
-	
+	//return (strncmp(buf,s.buf) < 0);
 }
 
 bool String::operator<=(const String &s) const{
-	
+	//return (strncmp(buf, s.buf) <= 0);
 }
 
 bool String::operator>=(const String &s) const{
-	
+	//return (strncmp(buf,s.buf) >= 0);
 }
 
 
 String String::operator+(const String &s) {
-	
+	/*String R;
+	strcpy(R.buf, buf);
+	strncat(R.buf, s.buf, MAXLEN-1);
+	return R;*/
 }
 
 String &String::operator+=(const String &s){
@@ -197,11 +224,11 @@ String::~String() {
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {
-	
+	//out << s.buf;
 }
 
 std::istream &operator>>(std::istream &in, String &s) {
-	
+	//in >> s.buf;
 }
 
 
