@@ -134,7 +134,7 @@ const char *String::strstr(const char *haystack, const char *needle) {
 	
 
 	if (!needle || !*needle) {
-		return nullptr;
+		return haystack;
 	}
 
 	while (*haystack) {
@@ -166,7 +166,7 @@ String String::reverse() {
 }
 
 int String::indexOf(const String &s) {
-	/*char *p = strstr(buf, s);
+	/*const char *p = strstr(buf, s);
 	if (p!=nullptr){
 		return p-buf;
 	} else {
