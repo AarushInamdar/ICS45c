@@ -69,13 +69,14 @@ char *String::strncat(char *dest, const char*src, int n) {
 	int i = strlen(dest);
 
 	int s = 0;
-
-	for (s=0; src[s]!='\0' && i < n; ++s) {
+	do {
 		dest[i] = src[s];
 		++i;
-	}
+		++s;
+	} while (i<n && s<strlen(src));
 	dest[i] = '\0';
 	return dest;
+	
 }
 
 int String::strcmp(const char *left, const char *right) {
