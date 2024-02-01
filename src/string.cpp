@@ -67,13 +67,14 @@ char *String::strcat(char *dest, const char*src) {
 
 char *String::strncat(char *dest, const char*src, int n) {
 	int i = strlen(dest);
-
 	int s = 0;
-	do {
+	
+	while (s<n && src[s]!='\0' && i < MAXLEN) {
 		dest[i] = src[s];
 		++i;
 		++s;
-	} while (s<n && src[s]!='\0');
+	}
+
 	dest[i] = '\0';
 	return dest;
 	
@@ -92,11 +93,11 @@ int String::strcmp(const char *left, const char *right) {
 
 int String::strncmp(const char *left, const char *right, int n) {
 	int i = 0;
-	for (i=0; i < n; ++i) {
+	for (i=0; i < n && i < MAXLEN; ++i) {
 		if (left[i] != right[i]) {
 			int res = (left[i]-right[i]);
 			return res;
-		}else if (left[i] == right[i] == '\0') {
+		} else if (left[i] == right[i] == '\0') {
 			return 0;
 		}
 	}
