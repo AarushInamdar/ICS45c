@@ -67,15 +67,14 @@ TEST(StringFunction, strncmp) {
 	String::strncpy(result, "foo", MAXLEN);
 	
 	String::strncpy(man, "foa", MAXLEN);
-	int value = String::strcmp(result, man); 
+	int value = String::strncmp(result, man, 3); 
 	EXPECT_EQ(value, 14);
 
-	String::strncpy(man, "foo", MAXLEN);
-	value = String::strcmp(result, man); 
+	value = String::strncmp(result, man, 2); 
 	EXPECT_EQ(value, 0);
 
 	String::strncpy(man, "foy", MAXLEN);
-	value = String::strcmp(result, man); 
+	value = String::strncmp(result, man, 3); 
 	EXPECT_EQ(value, -10);
 
 }
