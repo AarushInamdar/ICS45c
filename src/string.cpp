@@ -80,9 +80,9 @@ char *String::strncat(char *dest, const char*src, int n) {
 
 int String::strcmp(const char *left, const char *right) {
 	int i = 0;
-	for (i=0;(left[i] != '\0' && right[i] != '\0'); ++i) {
+	for (i=0;(left[i] != '\0' || right[i] != '\0'); ++i) {
 		if (left[i] != right[i]) {
-			int res = (left[i] > right[i]) ? (left[i]-right[i]) : (left[i]-right[i]);
+			int res = (left[i]-right[i]);
 			return res;
 		}
 	}
@@ -91,9 +91,9 @@ int String::strcmp(const char *left, const char *right) {
 
 int String::strncmp(const char *left, const char *right, int n) {
 	int i = 0;
-	for (i=0;left[i] != '\0' && right[i] != '\0' && i < n; ++i) {
+	for (i=0;(left[i] != '\0' || right[i] != '\0') && i < n; ++i) {
 		if (left[i] != right[i]) {
-			int res = (left[i] > right[i]) ? (left[i]-right[i]) : (left[i]-right[i]);
+			int res = (left[i]-right[i]);
 			return res;
 		}
 	}
