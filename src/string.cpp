@@ -21,8 +21,7 @@ String &String::operator=(const String &s) {
 }
 
 char &String::operator[](int index) {
-	char myChar = buf[index];
-	return myChar;
+	return buf[index];
 }
 
 int String::strlen(const char *s) {
@@ -49,8 +48,8 @@ char *String::strncpy(char *dest, const char *src, int n) {
 		}
 	dest[i] = '\0';
 	return dest;
-	
 }
+
 
 char *String::strcat(char *dest, const char*src) {
 	int i = strlen(dest);
@@ -169,58 +168,67 @@ String String::reverse() {
 	return String(myString);
 }
 
-int String::indexOf(const String &s) {
-	/*const char *p = strstr(buf, s);
+int String::indexOf(char s) {
+	const char *p = strchr(buf, s);
 	if (p!=nullptr){
 		return p-buf;
 	} else {
 		return -1;
-	}*/
+	}
+}
+
+int String::indexOf(const String &s) {
+	const char *p = strstr(buf, s.buf);
+	if (p!=nullptr){
+		return p-buf;
+	} else {
+		return -1;
+	}
 }
 
 bool String::operator==(const String &s) const {
-	//return (strncmp(this, s) == 0);
+	return (strcmp(buf, s.buf) == 0) ? true : false;
 }
 
 bool String::operator!=(const String &s) const{
-	//return (strncmp(buf,s.buf) != 0);
+	return (strcmp(buf,s.buf) != 0) ? true : false;
 }
 
 bool String::operator>(const String &s) const{
-	//return (strncmp(buf, s.buf) > 0);
+	return (strcmp(buf, s.buf) > 0) ? true : false;
 }
 
 bool String::operator<(const String &s) const{
-	//return (strncmp(buf,s.buf) < 0);
+	return (strcmp(buf,s.buf) < 0) ? true : false;
 }
 
 bool String::operator<=(const String &s) const{
-	//return (strncmp(buf, s.buf) <= 0);
+	return (strcmp(buf, s.buf) <= 0) ? true : false;
 }
 
 bool String::operator>=(const String &s) const{
-	//return (strncmp(buf,s.buf) >= 0);
+	return (strcmp(buf,s.buf) >= 0) ? true : false;
 }
 
 
 String String::operator+(const String &s) {
-	/*String R;
+	String R;
 	strcpy(R.buf, buf);
 	strncat(R.buf, s.buf, MAXLEN-1);
-	return R;*/
+	return R;
 }
 
 String &String::operator+=(const String &s){
-	//strncat(buf, s.buf, MAXLEN-1);
-	//return buf
+	strncat(buf, s.buf, MAXLEN-1);
+	return *this;
 }
 
 void String::print(std::ostream &out) const {
-	
+	out << buf;
 }
 
 void String::read(std::istream &in) {
-	
+	in >> buf;
 }
 
 
@@ -229,13 +237,13 @@ String::~String() {
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {
-	/*out << buf;
-	return out;*/
+	s.print(out);
+	return out;
 }
 
 std::istream &operator>>(std::istream &in, String &s) {
-	/*in >> buf;
-	return in;*/
+	s.read(in);
+	return in;
 }
 
 
