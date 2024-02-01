@@ -8,6 +8,7 @@ String::String(const char *s) {
 		strncpy(buf,s,MAXLEN-1);
 	} else {
 		buf[0] = '\0';
+		cout << "ERROR: String Capacity Exceeded" <<endl;
 	}	
 }
 
@@ -68,7 +69,7 @@ char *String::strncat(char *dest, const char*src, int n) {
 	int i = strlen(dest);
 	int s = 0;
 	
-	while (s<n && src[s]!='\0' && i < MAXLEN) {
+	while (src[s]!='\0' && s < n) {
 		dest[i] = src[s];
 		++i;
 		++s;
@@ -214,12 +215,22 @@ bool String::operator>=(const String &s) const{
 String String::operator+(const String &s) {
 	String R;
 	strcpy(R.buf, buf);
-	strncat(R.buf, s.buf, MAXLEN-1);
+	strcat(R.buf, s.buf);
+	if (strlen(R.buf) > MAXLEN) {
+		cout << "ERROR: String Capacity Exceeded" << endl;
+		R.buf[1024] = '\0';
+
+		}
 	return R;
 }
 
 String &String::operator+=(const String &s){
 	strncat(buf, s.buf, MAXLEN-1);
+
+	if (strlen(buf) > MAXLEN) {
+		cout << "ERROR: String Capacity Exceeded" << endl;
+		buf[1024] = '\0';
+		}
 	return *this;
 }
 
