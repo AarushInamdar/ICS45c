@@ -97,26 +97,37 @@ TEST(StringFunction, reverse_cpy) {
 }
 
 TEST(StringFunction, strchr) {
-    char str[] = "sample";
-	char * look;
+    const char* test_string = "Hello, World!";
+	char char_to_find = 'W';
 
-	look = strchr(str, 'p');
+	const char* result = String::strchr(test_string, char_to_find);
 
-	EXPECT_GT(look-(str+1), 0);
+	ASSERT_NE(result, nullptr);
+	EXPECT_EQ(*result, char_to_find);
 
-	look = strstr(str, "z");
-	EXPECT_LT(look-str+1, 0);
+	result = String::strchr(test_string, 'X');
+
+	EXPECT_EQ(result, nullptr);
+	
+	result = String::strchr(test_string, '\0');
+	ASSERT_NE(result,nullptr);
+	EXPECT_EQ(*result, '\0');
 
 }
 
 TEST(StringFunction, strstr) {
-    char str[] = "sample";
-	char * look;
+	const char* haystack = "Hello, World!";
+	const char* needle = "World";
 
-	look = strstr(str, "pl");
+	const char* result = String::strstr(haystack,needle);
+	ASSERT_NE(result,nullptr);
+	EXPECT_STREQ(*result, needle);
 
-	EXPECT_GT(look-str+1, 0);
+	const char* result = String::strstr(haystack,"needle");
+	EXPECT_EQ(result,nullptr);
 
-	look = strstr(str, "zz");
-	EXPECT_LT(look-str+1, -1);
+	const char* result = String::strstr(haystack,"");
+	ASSERT_NE(result,nullptr);
+	EXPECT_STREQ(*result, haystack);
+
 }
