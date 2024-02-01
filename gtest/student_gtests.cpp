@@ -77,6 +77,13 @@ TEST(StringFunction, strncmp) {
 	value = String::strncmp(result, man, 3); 
 	EXPECT_EQ(value, -10);
 
+
+	char test1[10] = "test";
+	char right[10] = "testa";
+
+	value = String::strncmp(test1, right, 5); 
+	EXPECT_LT(value, 0);
+
 }
 
 TEST(StringFunction, reverse_cpy) {

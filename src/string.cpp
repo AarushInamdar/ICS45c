@@ -97,6 +97,9 @@ int String::strncmp(const char *left, const char *right, int n) {
 		if (left[i] != right[i]) {
 			int res = (left[i]-right[i]);
 			return res;
+		} else if (left[i] == '\0' || right[i] == '\0') {
+			int res = (left[i]-right[i]);
+			return res;
 		}
 	}
 	return 0;
