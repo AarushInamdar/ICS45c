@@ -92,14 +92,15 @@ int String::strcmp(const char *left, const char *right) {
 
 int String::strncmp(const char *left, const char *right, int n) {
 	int i = 0;
-	for (i=0;(left[i] != '\0' || right[i] != '\0') && i < n; ++i) {
+	for (i=0; i < n; ++i) {
 		if (left[i] != right[i]) {
 			int res = (left[i]-right[i]);
 			return res;
+		}else if (left[i] == right[i] == '\0') {
+			return 0;
 		}
 	}
-	int res = (left[i]-right[i]);
-	return res;
+	return 0;
 }
 
 void String::reverse_cpy(char *dest, const char *src) {
