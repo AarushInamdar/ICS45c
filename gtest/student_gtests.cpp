@@ -102,7 +102,7 @@ TEST(StringFunction, strchr) {
 
 	look = strchr(str, 'p');
 
-	EXPECT_EQ(look-str+1, 3);
+	EXPECT_EQ(look-(str+1), 3);
 
 	look = strstr(str, "z");
 	EXPECT_EQ(look-str+1, -1);
