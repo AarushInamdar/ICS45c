@@ -20,27 +20,65 @@ TEST(StringFunction, strcpy) {
 }
 
 TEST(StringFunction, strncpy) {
-    EXPECT_TRUE(false);
+    char result[MAXLEN];
+	EXPECT_STREQ(String::strncpy(result, "foo", MAXLEN), "foo");
+	EXPECT_STREQ(String::strncpy(result, "olaf", MAXLEN), "olaf");
+
 }
 
 TEST(StringFunction, strcat) {
-    EXPECT_TRUE(false);
+    char src[MAXLEN] = "World";
+	char dest[MAXLEN] = "Hello";
+
+	EXPECT_STREQ(String::strcat(dest, src), "HelloWorld");
 }
 
 TEST(StringFunction, strncat) {
-    EXPECT_TRUE(false);
+    char src[MAXLEN] = "World";
+	char dest[MAXLEN] = "Hello";
+
+	EXPECT_STREQ(String::strncat(dest, src, MAXLEN), "HelloWorld");
 }
 
 TEST(StringFunction, strcmp) {
-    EXPECT_TRUE(false);
+	char result[10];
+    char man[10];
+	String::strcpy(result, "foo");
+	
+	String::strcpy(man, "foa");
+	int value = String::strcmp(result, man); 
+	EXPECT_EQ(value, 1);
+
+	String::strcpy(man, "foo");
+	value = String::strcmp(result, man); 
+	EXPECT_EQ(value, 0);
+
+	String::strcpy(man, "foy");
+	value = String::strcmp(result, man); 
+	EXPECT_EQ(value, -1);
 }
 
 TEST(StringFunction, strncmp) {
-    EXPECT_TRUE(false);
+   
 }
 
 TEST(StringFunction, reverse_cpy) {
-    EXPECT_TRUE(false);
+    char result[10];
+    char man[10];
+
+
+	String::strcpy(result, "foo");
+	String::reverse_cpy(man,result);
+   	EXPECT_STREQ(man, "oof");
+	
+	String::strcpy(result, "a");
+    String::reverse_cpy(man,result);
+    EXPECT_STREQ(result, "a");
+	
+	String::strcpy(result, "");
+    String::reverse_cpy(man, result);
+    EXPECT_STREQ(result, "");
+
 }
 
 TEST(StringFunction, strchr) {
