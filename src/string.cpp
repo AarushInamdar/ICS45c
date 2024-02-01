@@ -98,8 +98,8 @@ int String::strncmp(const char *left, const char *right, int n) {
 			return res;
 		}
 	}
-	return 0;
-
+	int res = (left[i]-right[i]);
+	return res;
 }
 
 void String::reverse_cpy(char *dest, const char *src) {
