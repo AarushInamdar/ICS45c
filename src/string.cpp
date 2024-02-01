@@ -166,49 +166,49 @@ String String::reverse() {
 }
 
 int String::indexOf(const String &s) {
-	char *p = strstr(buf, s);
+	/*char *p = strstr(buf, s);
 	if (p!=nullptr){
 		return p-buf;
 	} else {
 		return -1;
-	}
+	}*/
 }
 
 bool String::operator==(const String &s) const {
-	return (strncmp(this, s) == 0);
+	//return (strncmp(this, s) == 0);
 }
 
 bool String::operator!=(const String &s) const{
-	return (strncmp(buf,s.buf) != 0);
+	//return (strncmp(buf,s.buf) != 0);
 }
 
 bool String::operator>(const String &s) const{
-	return (strncmp(buf, s.buf) > 0);
+	//return (strncmp(buf, s.buf) > 0);
 }
 
 bool String::operator<(const String &s) const{
-	return (strncmp(buf,s.buf) < 0);
+	//return (strncmp(buf,s.buf) < 0);
 }
 
 bool String::operator<=(const String &s) const{
-	return (strncmp(buf, s.buf) <= 0);
+	//return (strncmp(buf, s.buf) <= 0);
 }
 
 bool String::operator>=(const String &s) const{
-	return (strncmp(buf,s.buf) >= 0);
+	//return (strncmp(buf,s.buf) >= 0);
 }
 
 
 String String::operator+(const String &s) {
-	String R;
+	/*String R;
 	strcpy(R.buf, buf);
 	strncat(R.buf, s.buf, MAXLEN-1);
-	return R;
+	return R;*/
 }
 
 String &String::operator+=(const String &s){
-	strncat(buf, s.buf, MAXLEN-1);
-	return buf
+	//strncat(buf, s.buf, MAXLEN-1);
+	//return buf
 }
 
 void String::print(std::ostream &out) const {
@@ -225,11 +225,13 @@ String::~String() {
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {
-	out << s.buf;
+	/*out << buf;
+	return out;*/
 }
 
 std::istream &operator>>(std::istream &in, String &s) {
-	in >> s.buf;
+	/*in >> buf;
+	return in;*/
 }
 
 

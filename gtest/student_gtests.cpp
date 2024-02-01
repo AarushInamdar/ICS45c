@@ -102,15 +102,15 @@ TEST(StringFunction, strchr) {
 
 	const char* result = String::strchr(test_string, char_to_find);
 
-	ASSERT_NE(result, nullptr);
-	EXPECT_EQ(*result, char_to_find);
+	ASSERT_NE(*result, nullptr);
+	EXPECT_EQ(*result, *char_to_find);
 
 	result = String::strchr(test_string, 'X');
 
-	EXPECT_EQ(result, nullptr);
+	EXPECT_EQ(*result, nullptr);
 	
 	result = String::strchr(test_string, '\0');
-	ASSERT_NE(result,nullptr);
+	ASSERT_NE(*result,nullptr);
 	EXPECT_EQ(*result, '\0');
 
 }
@@ -120,14 +120,14 @@ TEST(StringFunction, strstr) {
 	const char* needle = "World";
 
 	const char* result = String::strstr(haystack,needle);
-	ASSERT_NE(result,nullptr);
-	EXPECT_STREQ(*result, needle);
+	ASSERT_NE(*result,nullptr);
+	EXPECT_STREQ(*result,*needle);
 
 	const char* result = String::strstr(haystack,"needle");
-	EXPECT_EQ(result,nullptr);
+	EXPECT_EQ(*result,nullptr);
 
 	const char* result = String::strstr(haystack,"");
-	ASSERT_NE(result,nullptr);
-	EXPECT_STREQ(*result, haystack);
+	ASSERT_NE(*result,nullptr);
+	EXPECT_STREQ(*result,*haystack);
 
 }
