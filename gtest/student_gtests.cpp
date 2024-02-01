@@ -38,6 +38,9 @@ TEST(StringFunction, strncat) {
 	char dest[MAXLEN] = "Hello";
 
 	EXPECT_STREQ(String::strncat(dest, src, MAXLEN), "HelloWorld");
+
+	EXPECT_STREQ(String::strncat(dest, src, 3), "HelloWorldWor");
+
 }
 
 TEST(StringFunction, strcmp) {
