@@ -7,7 +7,6 @@ String::String(const char *s) {
 	if (s && strlen(s)<MAXLEN) {
 		strncpy(buf,s,MAXLEN-1);
 	} else {
-		buf[0] = '\0';
 		cout << "ERROR: String Capacity Exceeded" <<endl;
 	}	
 }
@@ -22,7 +21,7 @@ String &String::operator=(const String &s) {
 }
 
 char &String::operator[](int index) {
-	return buf[index];
+	return (index < strlen(buf)) ? buf[index] : buf[0];
 }
 
 int String::strlen(const char *s) {
