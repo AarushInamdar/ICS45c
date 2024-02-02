@@ -221,8 +221,7 @@ String String::operator+(const String &s) {
 	strcat(R.buf, s.buf);
 	if (strlen(R.buf) > MAXLEN) {
 		cout << "ERROR: String Capacity Exceeded" << endl;
-		R.buf[1024] = '\0';
-
+		R.buf[MAXLEN-1] = '\0';
 		}
 	return R;
 }
