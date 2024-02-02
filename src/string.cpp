@@ -161,18 +161,18 @@ const char *String::strstr(const char *haystack, const char *needle) {
 	return nullptr;
 }
 
-int String::size() {
+int String::size() const {
 	int value = strlen(buf);
 	return value;
 }
 
-String String::reverse() {
+String String::reverse() const {
 	char* myString;
 	reverse_cpy(myString, buf);
 	return String(myString);
 }
 
-int String::indexOf(char s) {
+int String::indexOf(char s) const {
 	const char *p = strchr(buf, s);
 	if (p!=nullptr){
 		return p-buf;
@@ -181,7 +181,7 @@ int String::indexOf(char s) {
 	}
 }
 
-int String::indexOf(const String &s) {
+int String::indexOf(const String &s) const {
 	const char *p = strstr(buf, s.buf);
 	if (p!=nullptr){
 		return p-buf;
@@ -215,7 +215,7 @@ bool String::operator>=(const String &s) const{
 }
 
 
-String String::operator+(const String &s) {
+String String::operator+(const String &s) const {
 	String R;
 	strcpy(R.buf, buf);
 	strcat(R.buf, s.buf);
