@@ -72,7 +72,7 @@ char *String::strncat(char *dest, const char*src, int n) {
 	int i = strlen(dest);
 	int s = 0;
 	
-	while (src[s]!='\0' && s < n && i < MAXLEN) {
+	while (src[s]!='\0' && s < n) {
 		dest[i] = src[s];
 		++i;
 		++s;
