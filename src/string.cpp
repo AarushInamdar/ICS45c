@@ -7,7 +7,7 @@ String::String(const char *s) {
 	if (s && strlen(s)<MAXLEN) {
 		strncpy(buf,s,MAXLEN-1);
 	} else {
-		cout << "ERROR: String Capacity Exceeded" <<endl;
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
 		strncpy(buf,s,MAXLEN-1);
 	}	
 }
