@@ -13,7 +13,12 @@ String::String(const char *s) {
 }
 
 String::String(const String &s) {
-	strncpy(buf, s.buf, MAXLEN-1);
+	if (strlen(s.buf)<MAXLEN) {
+		strncpy(buf,s.buf,MAXLEN-1);
+	} else {
+		std::cout << "ERROR: String Capacity Exceeded" << std::endl;
+		strncpy(buf,s.buf,MAXLEN-1);
+	}
 }
 
 String &String::operator=(const String &s) {
