@@ -75,12 +75,12 @@ String &String::operator+=(String s) {
 
 
 void String::print(std::ostream &out) const {
-	
+	out << buf;
 }
 
 
 void String::read(std::istream &in) {
-	
+	in buf;
 }
 
 
