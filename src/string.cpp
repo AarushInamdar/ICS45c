@@ -80,12 +80,16 @@ void String::print(std::ostream &out) const {
 
 
 void String::read(std::istream &in) {
-	in buf;
+	in >> buf;
 }
 
 
-char String::strdup(const char *src) {
-	
+char *String::strdup(const char *src) {
+	char *dest = new String(strlen(src));
+
+	strcpy(dest, src);
+
+	return *dest;
 }
 
 int String::strlen(const char *s) {
@@ -138,3 +142,59 @@ char *String::strncat(char *dest, const char*src, int n) {
 		}
 	dest[i] = '\0';
 	return dest;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
