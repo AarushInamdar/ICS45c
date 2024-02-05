@@ -6,6 +6,12 @@
 #include "string.hpp"
 #include "alloc.hpp"
 
+
+TEST(StringFunction, strdup) {
+    EXPECT_TRUE(false);
+}
+
+
 TEST(StringFunction, strlen) {
     EXPECT_EQ(String::strlen(""), 0);
     EXPECT_EQ(String::strlen("foo"), 3);
@@ -21,10 +27,6 @@ TEST(StringFunction, strcpy) {
 
     EXPECT_EQ(String::strcpy(result, ""), result);
     EXPECT_STREQ(result, "");
-}
-
-TEST(StringFunction, strdup) {
-    EXPECT_TRUE(false);
 }
 
 TEST(StringFunction, strncpy) {
