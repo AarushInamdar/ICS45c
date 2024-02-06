@@ -47,12 +47,23 @@ String String::reverse() const {
 }
 
 int String::indexOf(char c) const {
-	
+	const char *p = strchr(buf, c);
+	if (p!=nullptr){
+		return p-buf;
+	} else {
+		return -1;
+	}
 }
 
-int String::indexOf(String s) const {
-	
+int String::indexOf(const String s) const {
+	const char *p = strstr(buf, s.buf);
+	if (p!=nullptr){
+		return p-buf;
+	} else {
+		return -1;
+	}
 }
+
 
 bool String::operator==(String s) const {
 	bool res = strcmp(buf, s.buf);
@@ -102,9 +113,9 @@ void String::print(std::ostream &out) const {
 	out << buf;
 }
 
-
+//potential cause of Stack overflow issue
 void String::read(std::istream &in) {
-	in >> *buf;
+	//copy private buf to a stack variable and in>> that variable
 }
 
 
@@ -248,7 +259,7 @@ std::ostream &operator<<(std::ostream &out, String s) {
 	s.print(out);
 	return out;
 }
-
+//potential cause of Stack overflow issue
 std::istream &operator>>(std::istream &in, String &s) {
 	s.read(in);
 	return in;
