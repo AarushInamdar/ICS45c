@@ -8,7 +8,15 @@
 
 
 TEST(StringFunction, strdup) {
-    EXPECT_TRUE(false);
+    char src[] = "World";
+	char *p = src;
+	EXPECT_STREQ(strdup(p),p);
+
+	char myVar[] = "Where is my Water?";
+	char *pointer = myVar;
+	EXPECT_STREQ(strdup(pointer), pointer);
+	std::cout << "Pointer variable: " <<  pointer << std::endl;
+
 }
 
 TEST(StringFunction, strlen) {
@@ -29,37 +37,29 @@ TEST(StringFunction, strcpy) {
 }
 
 TEST(StringFunction, strncpy) {
-    char result[MAXLEN];
+    int MAXLEN = 1024;
+	char result[] = "man";
 	EXPECT_STREQ(String::strncpy(result, "foo", MAXLEN), "foo");
 	EXPECT_STREQ(String::strncpy(result, "olaf", MAXLEN), "olaf");
 
 }
 
 TEST(StringFunction, strcat) {
-    char src[MAXLEN] = "World";
-	char dest[MAXLEN] = "Hello";
+    char src[] = "World";
+	char dest[] = "Hello";
 
 	EXPECT_STREQ(String::strcat(dest, src), "HelloWorld");
 }
 
 TEST(StringFunction, strncat) {
-    char src[MAXLEN] = "World";
-	char dest[MAXLEN] = "Hello";
+    int MAXLEN = 1024;
+	char src[] = "World";
+	char dest[] = "Hello";
 
 	EXPECT_STREQ(String::strncat(dest, src, MAXLEN), "HelloWorld");
 
 	EXPECT_STREQ(String::strncat(dest, src, 3), "HelloWorldWor");
 
-}
-
-TEST(StringFunction, strcmp) {
-	char result[10];
-    char man[10];
-	String::strcpy(result, "foo");
-	
-	String::strcpy(man, "foa");
-	int value = String::strcmp(result, man); 
-	EXPECT_EQ(value, 14);
 }
 
 
@@ -84,6 +84,9 @@ TEST(StringFunction, strcmp) {
 TEST(StringFunction, strncmp) {
     char result[10];
     char man[10];
+	int MAXLEN = 1024;
+
+
 	String::strncpy(result, "foo", MAXLEN);
 	
 	String::strncpy(man, "foa", MAXLEN);

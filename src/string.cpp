@@ -16,61 +16,85 @@ void String::swap(String &s) {
 }
 
 String &String::operator=(String s) {
-	
+	strcpy(buf,s.buf);
+	return *this;
 }
 
-String &String::operator[](int index) {
-	
+char &String::operator[](int index) {
+	if (in_bounds(index)) {
+		return buf[index];
+	} else {
+		return buf[0];
+	}
 }
 
 const char &String::operator[](int index) const {
-	
+	if (in_bounds(index)) {
+		return buf[index];
+	} else {
+		return buf[0];
+	}
 }
 
 int String::size() const {
-	
+	return strlen(buf);
 }
 
 String String::reverse() const {
-	
+	char *dest;
+	reverse_cpy(dest, buf);
+	return String(dest);
 }
 
 int String::indexOf(char c) const {
 	
 }
 
-bool String::operator==(String s) const {
+int String::indexOf(String s) const {
 	
+}
+
+bool String::operator==(String s) const {
+	bool res = strcmp(buf, s.buf);
+	return res;
 }
 
 bool String::operator!=(String s) const {
-	
+	bool res = strcmp(buf, s.buf);
+	return !res;
 }
+
 bool String::operator>(String s) const {
-	
+	return (strcmp(buf, s.buf) > 0) ? true : false;
 }
 
 bool String::operator<(String s) const {
-	
+	return (strcmp(buf, s.buf) < 0) ? true : false;
+
 }
 
 bool String::operator<=(String s) const {
-	
+	return (strcmp(buf, s.buf) <= 0) ? true : false;
 }
 
 
 bool String::operator>=(String s) const {
-	
+	return (strcmp(buf, s.buf) >=  0) ? true : false;
+
 }
 
 
 String String::operator+(String s) const {
-	
+	String R;
+	strcpy(R.buf, buf);
+	strcat(R.buf, s.buf);
+	return R;
 }
 
 
 String &String::operator+=(String s) {
-	
+	strcat(buf, s.buf);
+	return *this;
 }
 
 
@@ -80,16 +104,16 @@ void String::print(std::ostream &out) const {
 
 
 void String::read(std::istream &in) {
-	in >> buf;
+	in >> *buf;
 }
 
 
 char *String::strdup(const char *src) {
-	char *dest = new String(strlen(src));
+	char *dest = new char[strlen(src)];
 
 	strcpy(dest, src);
 
-	return *dest;
+	return dest;
 }
 
 int String::strlen(const char *s) {
@@ -144,8 +168,6 @@ char *String::strncat(char *dest, const char*src, int n) {
 	return dest;
 }
 
-
-
 int String::strcmp(const char *left, const char *right) {
 	int i = 0;
 	for (i=0;(left[i] != '\0' || right[i] != '\0'); ++i) {
@@ -193,56 +215,41 @@ const char *String::strchr(const char *str, char c) {
 		return nullptr;
 }
 
+const char *String::strstr(const char *haystack, const char *needle) {
+	
+
+	if (!needle || !*needle) {
+		return haystack;
+	}
+
+	while (*haystack) {
+		const char *h = haystack;
+		const char *n = needle;
+
+		while (*n && *h && *h == *n) {
+			++h;
+			++n;
+		}
+		if (!*n) {
+			return haystack;
+		}
+
+		++haystack;
+	}
+	return nullptr;
+}
+
+String::~String() {
+	delete buf;
+}
 
 
+std::ostream &operator<<(std::ostream &out, String s) {
+	s.print(out);
+	return out;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+std::istream &operator>>(std::istream &in, String &s) {
+	s.read(in);
+	return in;
+}
