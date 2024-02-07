@@ -2,21 +2,37 @@
 using namespace std;
 #include "string.hpp"
 
+
+//current things to address: dynamic size of buf (prevents SEGV);  operator >>(prevents Stack overflow); strdup(); strcat(); strncat(); strcmp(); strncmp();
 String::String(const char *s) {
-	
+	/*char *buf = new char[strlen(s)]; //find a way to allot the exact space without causing a SEGV like u are
+	if (s) {
+		strcpy(buf, s);
+	}*/
+
+	char *buf = strdup(s);
 }
 
 String::String(const String &s) {
-	
+	char *buf = strdup(s.buf);
+	/*char *buf = new char[]; //maybe using strdup() will work
+	if (s.buf) {
+		strcpy(buf, s.buf);
+	} */
 }
 
 
 void String::swap(String &s) {
-	
+	String temp;
+	temp.buf = strdup(s.buf);
+	strcpy(s.buf, buf);
+	strcpy(buf, temp.buf);	
 }
 
 String &String::operator=(String s) {
-	strcpy(buf,s.buf);
+	
+	buf = s.buf;
+	s.buf = nullptr;
 	return *this;
 }
 
@@ -66,13 +82,12 @@ int String::indexOf(const String s) const {
 
 
 bool String::operator==(String s) const {
-	bool res = strcmp(buf, s.buf);
-	return res;
+	return (strcmp(buf, s.buf) == 0) ? true : false;
 }
 
 bool String::operator!=(String s) const {
-	bool res = strcmp(buf, s.buf);
-	return !res;
+	return (strcmp(buf, s.buf) !=  0) ? true : false;
+
 }
 
 bool String::operator>(String s) const {
@@ -91,7 +106,6 @@ bool String::operator<=(String s) const {
 
 bool String::operator>=(String s) const {
 	return (strcmp(buf, s.buf) >=  0) ? true : false;
-
 }
 
 
@@ -116,30 +130,35 @@ void String::print(std::ostream &out) const {
 //potential cause of Stack overflow issue
 void String::read(std::istream &in) {
 	//copy private buf to a stack variable and in>> that variable
+	String temp;
+	temp.buf = buf;
+	in >> temp;
 }
 
 
 char *String::strdup(const char *src) {
-	char *dest = new char[strlen(src)];
+	char *buf = new char[strlen(src)+1]; //how to better assign the proper length;
 
-	strcpy(dest, src);
+	strcpy(buf, src);
 
-	return dest;
+	return buf;
 }
 
 int String::strlen(const char *s) {
-	int i = 0;
+	int i = 0;  //add some way to deal with nullptr references 
 	for (i=0; s[i] != '\0'; ++i) {
 	}
 	return i;
 }
 	
 char *String::strcpy(char *dest, const char *src) {
+
 	int i = 0;
 	for (i=0; src[i]!='\0'; ++i) {
 		dest[i] = src[i];
 	}
 	dest[i] = '\0';
+	
 	return dest;
 
 }
@@ -150,6 +169,7 @@ char *String::strncpy(char *dest, const char *src, int n) {
 		dest[i] = src[i];
 		}
 	dest[i] = '\0';
+	
 	return dest;
 }
 
@@ -208,7 +228,6 @@ void String::reverse_cpy(char *dest, const char *src) {
 		i++;
 		}
 	dest[i] = '\0';
-	
 }
 
 const char *String::strchr(const char *str, char c) {
@@ -264,3 +283,5 @@ std::istream &operator>>(std::istream &in, String &s) {
 	s.read(in);
 	return in;
 }
+
+
