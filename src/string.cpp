@@ -104,7 +104,7 @@ int String::indexOf(const String &s) const {
 
 	if (sub==0) return 0;
 	
-	for (int i = 0; i <len-sub; i++){
+	for (int i = 0; i <=len-sub; i++){
 		bool found = true;
 		for (int k = 0; k<sub; k++){
 			if (buf[i+k]!=s.buf[k]){
@@ -153,22 +153,15 @@ bool String::operator>=(String s) const {
 
 String String::operator+(const String s) const { //probably have to use "new" here or in its helper functions;
 	int len = this->size() + s.size();
-	char *res = new char [len+1];
-	
 
-	for (int i=0; i<this->size(); ++i){
-		res[i] = this->buf[i];
-	}
-	
-	for (int i=0; i<this->size(); ++i){
-		res[this->size()+i]= s.buf[i];
-	}
+	String result(len);
 
-	res[len] = '\0';
-	String result(res);
-	delete[] res;
+	result.strcpy(result.buf, this->buf);
+	result.strcat(result.buf + this->size(), s.buf);
+
 	return result;
 
+	
 }
 
 
