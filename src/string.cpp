@@ -92,8 +92,9 @@ int String::indexOf(char c) const {
 		if (buf[i] == c) {
 			return i;
 		}
-	return -1;
 	}
+	return -1;
+	
 }
 
 //rework this function
