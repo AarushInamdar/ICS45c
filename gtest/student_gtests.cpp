@@ -11,17 +11,20 @@ TEST(StringFunction, strdup) {
     char src[] = "World";
 	char *p = src;
 	EXPECT_STREQ(strdup(p),p);
+	EXPECT_NE(strdup(p), p);
 
 	char myVar[] = "Where is my Water?";
 	char *pointer = myVar;
 	EXPECT_STREQ(strdup(pointer), pointer);
+	EXPECT_NE(strdup(pointer), pointer);
 	std::cout << "Pointer variable: " <<  pointer << std::endl;
 
 }
 
 TEST(StringFunction, strlen) {
     EXPECT_EQ(String::strlen(""), 0);
-    EXPECT_EQ(String::strlen("foo"), 3);
+    EXPECT_EQ(String::strlen("crazy"), 5);
+	EXPECT_EQ(String::strlen("a"),1);
 }
 
 TEST(StringFunction, strcpy) {

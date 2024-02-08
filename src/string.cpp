@@ -106,8 +106,7 @@ int String::indexOf(const String s) const {
 	int sub = strlen(s.buf);
 	for (int i = 0; i <len-sub; i++){
 		bool found = true;
-		int k = 0;
-		for (k = 0; k<sub; k++){
+		for (int k = 0; k<sub; k++){
 			if (buf[i+k]!=s.buf[k]){
 				found = false;
 				break;
@@ -123,30 +122,29 @@ int String::indexOf(const String s) const {
 
 
 bool String::operator==(String s) const {
-	return (strcmp(buf, s.buf) == 0) ? true : false;
-}
+	return (strcmp(buf, s.buf) == 0) }
 
 bool String::operator!=(String s) const {
-	return (strcmp(buf, s.buf) !=  0) ? true : false;
+	return (strcmp(buf, s.buf) !=  0);
 
 }
 
 bool String::operator>(String s) const {
-	return (strcmp(buf, s.buf) > 0) ? true : false;
+	return (strcmp(buf, s.buf) > 0);
 }
 
 bool String::operator<(String s) const {
-	return (strcmp(buf, s.buf) < 0) ? true : false;
+	return (strcmp(buf, s.buf) < 0);
 
 }
 
 bool String::operator<=(String s) const {
-	return (strcmp(buf, s.buf) <= 0) ? true : false;
+	return (strcmp(buf, s.buf) <= 0);
 }
 
 
 bool String::operator>=(String s) const {
-	return (strcmp(buf, s.buf) >=  0) ? true : false;
+	return (strcmp(buf, s.buf) >=  0);
 }
 
 
