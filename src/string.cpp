@@ -98,7 +98,7 @@ int String::indexOf(char c) const {
 }
 
 //rework this function
-int String::indexOf(const String s) const {
+int String::indexOf(String s) const {
 	if (s.buf[0] == '\0') {
 		return 0;
 	}
@@ -244,7 +244,6 @@ char *String::strcat(char *dest, const char*src) {
 
 char *String::strncat(char *dest, const char*src, int n) {
 	char *i = dest + strlen(dest);
-	int s = 0;
 	
 	while (n-- > 0 && *src !='\0'){
 		*i++ = *src++;
