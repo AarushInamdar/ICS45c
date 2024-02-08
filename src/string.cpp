@@ -265,12 +265,11 @@ int String::strcmp(const char *left, const char *right) {
 }
 
 int String::strncmp(const char *left, const char *right, int n) {
-	int i = 0;
-	while (left[i] == right[i] && left[i] != '\0' && right[i] != '\0' && i < n) {
-		i++;
+	while (*left==*right && *left !='\0'){
+		++left;
+		++right;
 	}
-	//if (i==n) return 0;
-	return left[i]-right[i];
+	return *(unsigned char *)left - *(unsigned char *)right;
 }
 
 void String::reverse_cpy(char *dest, const char *src) {
