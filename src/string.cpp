@@ -10,16 +10,16 @@ String::String(const char *s) {
 		strcpy(buf, s);
 	}*/
 
-	if (s==nullptr || s[0]=='\0'){
+	if (s==nullptr || *s=='\0'){
 		buf = new char[1];
 		buf[0] = '\0';
 	} else {
-		char *buf = strdup(s);
+		buf = strdup(s);
 	}
 }
 
 String::String(const String &s) {
-	char *buf = strdup(s.buf);	
+	buf = strdup(s.buf);	
 }
 
 String::String(String &&s) : buf(s.buf) {
@@ -76,28 +76,49 @@ int String::size() const {
 }
 
 String String::reverse() const {
-	char *dest;
-	reverse_cpy(dest, buf);
-	return String(dest);
+	int len = strlen(buf);
+	String rev(len);
+
+	for (int i = 0;i<len; i++){
+		rev.buf[i] = buf[len-1-i];
+	}
+	rev.buf[len]='\0';
+	return rev;
+
 }
 
 int String::indexOf(char c) const {
-	const char *p = strchr(buf, c);
-	if (p!=nullptr){
-		return p-buf;
-	} else {
-		return -1;
+	for (int i = 0; buf[i] != '\0'; i++){
+		if (buf[i] == c) {
+			return i;
+		}
+	return -1;
 	}
 }
 
 //rework this function
 int String::indexOf(const String s) const {
-	const char *p = strstr(buf, s.buf);
-	if (p!=nullptr){
-		return p-buf;
-	} else {
-		return -1;
+	if (s.buf[0] == '\0') {
+		return 0;
 	}
+
+	int len = strlen(buf);
+	int sub = strlen(s.buf);
+	for (int i = 0; i <len-sub; i++){
+		bool found = true;
+		int k = 0;
+		for (k = 0; k<sub; k++){
+			if (buf[i+k]!=s.buf[k]){
+				found = false;
+				break;
+			}
+		if (found) {
+			return i;
+		}
+	}
+	}
+	
+	return -1;
 }
 
 
@@ -130,14 +151,23 @@ bool String::operator>=(String s) const {
 
 
 String String::operator+(String s) const { //probably have to use "new" here or in its helper functions;
-	int new_length = strlen(s.buf) + strlen(buf);
-	char *R = new char[new_length+1];
-	strcpy(R, buf);
-	strcat(R, s.buf);
-	String result(R);
-	delete[] R;
+	int len = this->size() + s.size();
+	char *res = new char [len+1];
+	
 
+	for (int i=0; i<this->size(); ++i){
+		res[i] = this->buf[i];
+	}
+	
+	for (int i=0; i<this->size(); ++i){
+		res[this->size()+i]= s.buf[i];
+	}
+
+	res[len] = '\0';
+	String result(res);
+	delete[] res;
 	return result;
+
 }
 
 
@@ -188,15 +218,11 @@ int String::strlen(const char *s) {
 }
 	
 char *String::strcpy(char *dest, const char *src) {
-
 	int i = 0;
-	for (i=0; src[i]!='\0'; ++i) {
-		dest[i] = src[i];
+	while((dest[i]=src[i])!='\0'){
+		i++;
 	}
-	dest[i] = '\0';
-	
 	return dest;
-
 }
 
 char *String::strncpy(char *dest, const char *src, int n) {
@@ -211,27 +237,19 @@ char *String::strncpy(char *dest, const char *src, int n) {
 
 
 char *String::strcat(char *dest, const char*src) {
-	int i = strlen(dest);
-	int s = 0;
-	
-	for (s=0; src[s] != '\0'; ++s) {
-		dest[i] = src[s];
-		++i;
-		}
-	dest[i] = '\0';
+	int dest_len = strlen(dest);
+	strcpy(dest+dest_len, src);
 	return dest;
-	
 }
 
 char *String::strncat(char *dest, const char*src, int n) {
-	int i = strlen(dest);
+	char *i = dest + strlen(dest);
 	int s = 0;
 	
-	for (s=0; src[s] != '\0' && s < n; ++s) {
-		dest[i] = src[s];
-		++i;
-		}
-	dest[i] = '\0';
+	while (n-- > 0 && *src !='\0'){
+		*i++ = *src++;
+	}
+	*i = '\0';
 	return dest;
 }
 
@@ -251,7 +269,7 @@ int String::strncmp(const char *left, const char *right, int n) {
 	while (left[i] == right[i] && left[i] != '\0' && right[i] != '\0' && i < n) {
 		i++;
 	}
-	if (i==n) return 0;
+	//if (i==n) return 0;
 	return left[i]-right[i];
 }
 
@@ -314,7 +332,7 @@ std::ostream &operator<<(std::ostream &out, String s) {
 	s.print(out);
 	return out;
 }
-//potential cause of Stack overflow issue
+
 std::istream &operator>>(std::istream &in, String &s) {
 	s.read(in);
 	return in;
