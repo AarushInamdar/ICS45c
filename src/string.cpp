@@ -122,7 +122,8 @@ int String::indexOf(const String s) const {
 
 
 bool String::operator==(String s) const {
-	return (strcmp(buf, s.buf) == 0) }
+	return (strcmp(buf, s.buf) == 0);
+}
 
 bool String::operator!=(String s) const {
 	return (strcmp(buf, s.buf) !=  0);
