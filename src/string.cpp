@@ -103,8 +103,8 @@ int String::indexOf(String s) const {
 		return 0;
 	}
 
-	int len = strlen(buf);
-	int sub = strlen(s.buf);
+	int len = this->size();
+	int sub = s.size();
 	for (int i = 0; i <len-sub; i++){
 		bool found = true;
 		for (int k = 0; k<sub; k++){
