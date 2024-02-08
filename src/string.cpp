@@ -99,12 +99,11 @@ int String::indexOf(char c) const {
 
 //rework this function
 int String::indexOf(String s) const {
-	if (s.buf[0] == '\0') {
-		return 0;
-	}
-
 	int len = this->size();
 	int sub = s.size();
+
+	if (sub==0) return 0;
+	
 	for (int i = 0; i <len-sub; i++){
 		bool found = true;
 		for (int k = 0; k<sub; k++){
@@ -114,11 +113,13 @@ int String::indexOf(String s) const {
 			}
 		if (found) {
 			return i;
+			}
 		}
-	}
 	}
 	
 	return -1;
+	
+
 }
 
 
@@ -150,7 +151,7 @@ bool String::operator>=(String s) const {
 }
 
 
-String String::operator+(String s) const { //probably have to use "new" here or in its helper functions;
+String String::operator+(const String s) const { //probably have to use "new" here or in its helper functions;
 	int len = this->size() + s.size();
 	char *res = new char [len+1];
 	
@@ -171,7 +172,7 @@ String String::operator+(String s) const { //probably have to use "new" here or 
 }
 
 
-String &String::operator+=(String s) {
+String &String::operator+=(const String s) {
 	int new_length = strlen(buf) + strlen(s.buf);
 	char *replacement = new char[new_length+1];
 
