@@ -11,13 +11,17 @@ public:
     // construct this string as a copy of string s
     String(const String &s);
 
+	String(String &&s);
+
     // construct this string by moving from string s
     // String(String &&s);
     // swap buf between this string and s using std::swap, explained later
     void swap(String &s);
 
     // assignment operator from one string, s, to this string
-    String &operator=(String s);
+    String &operator=(const String &s);
+
+	String &operator=(String &&s);
 
     // assign to this string by moving from string s
     // String &operator=(String &&s);

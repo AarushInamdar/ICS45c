@@ -10,36 +10,54 @@ String::String(const char *s) {
 		strcpy(buf, s);
 	}*/
 
-	char *buf = strdup(s);
+	if (s==nullptr || s[0]=='\0'){
+		buf = new char[1];
+		buf[0] = '\0';
+	} else {
+		char *buf = strdup(s);
+	}
 }
 
 String::String(const String &s) {
-	char *buf = strdup(s.buf);
-	/*char *buf = new char[]; //maybe using strdup() will work
-	if (s.buf) {
-		strcpy(buf, s.buf);
-	} */
+	char *buf = strdup(s.buf);	
 }
 
+String::String(String &&s) : buf(s.buf) {
+	s.buf = nullptr;
+}
+
+String::String(int length) : buf(new char[length+1]) {
+	buf[0] = '\0';
+}
 
 void String::swap(String &s) {
-	String temp;
-	temp.buf = strdup(s.buf);
-	strcpy(s.buf, buf);
-	strcpy(buf, temp.buf);	
+	std::swap(buf, s.buf);	
 }
 
-String &String::operator=(String s) {
+String &String::operator=(const String &s) {
+	if (this != &s) {
+	delete[] buf;
+	buf = strdup(s.buf);
 	
-	buf = s.buf;
-	s.buf = nullptr;
+	}
+	return *this;
+	
+}
+
+String &String::operator=(String &&s) {
+	if (this != &s) {
+		delete[] buf;
+		buf = s.buf;
+		s.buf = nullptr;
+	}
 	return *this;
 }
-
+	
 char &String::operator[](int index) {
 	if (in_bounds(index)) {
 		return buf[index];
 	} else {
+		cout << "ERROR: Index out of bounds" << endl;
 		return buf[0];
 	}
 }
@@ -48,6 +66,7 @@ const char &String::operator[](int index) const {
 	if (in_bounds(index)) {
 		return buf[index];
 	} else {
+		cout << "ERROR: Index out of bounds" << endl;
 		return buf[0];
 	}
 }
@@ -71,6 +90,7 @@ int String::indexOf(char c) const {
 	}
 }
 
+//rework this function
 int String::indexOf(const String s) const {
 	const char *p = strstr(buf, s.buf);
 	if (p!=nullptr){
@@ -109,16 +129,27 @@ bool String::operator>=(String s) const {
 }
 
 
-String String::operator+(String s) const {
-	String R;
-	strcpy(R.buf, buf);
-	strcat(R.buf, s.buf);
-	return R;
+String String::operator+(String s) const { //probably have to use "new" here or in its helper functions;
+	int new_length = strlen(s.buf) + strlen(buf);
+	char *R = new char[new_length+1];
+	strcpy(R, buf);
+	strcat(R, s.buf);
+	String result(R);
+	delete[] R;
+
+	return result;
 }
 
 
 String &String::operator+=(String s) {
-	strcat(buf, s.buf);
+	int new_length = strlen(buf) + strlen(s.buf);
+	char *replacement = new char[new_length+1];
+
+	strcpy(replacement, buf);
+	strcat(replacement, s.buf);
+
+	delete[] buf;
+	buf = replacement;
 	return *this;
 }
 
@@ -130,23 +161,28 @@ void String::print(std::ostream &out) const {
 //potential cause of Stack overflow issue
 void String::read(std::istream &in) {
 	//copy private buf to a stack variable and in>> that variable
-	String temp;
-	temp.buf = buf;
-	in >> temp;
+	char currentVar[2048];
+
+	in >> currentVar;
+
+	delete[] buf;
+	buf = strdup(currentVar);
 }
 
 
 char *String::strdup(const char *src) {
-	char *buf = new char[strlen(src)+1]; //how to better assign the proper length;
+	int length = strlen(src) + 1;
+	char *res = new char[length]; //how to better assign the proper length;
 
-	strcpy(buf, src);
+	strcpy(res, src);
 
-	return buf;
+	return res;
 }
 
 int String::strlen(const char *s) {
-	int i = 0;  //add some way to deal with nullptr references 
-	for (i=0; s[i] != '\0'; ++i) {
+	int i = 0;
+	while (s[i] != '\0') {
+		i++;
 	}
 	return i;
 }
@@ -270,7 +306,7 @@ const char *String::strstr(const char *haystack, const char *needle) {
 }
 
 String::~String() {
-	delete buf;
+	delete[] buf;
 }
 
 
