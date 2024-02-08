@@ -104,6 +104,8 @@ TEST(StringFunction, strncmp) {
 	EXPECT_EQ(value, -10);
 
 
+
+
 	char test1[10] = "test";
 	char right[10] = "testa";
 

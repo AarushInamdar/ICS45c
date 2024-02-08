@@ -36,8 +36,8 @@ void String::swap(String &s) {
 
 String &String::operator=(const String &s) {
 	if (this != &s) {
-	delete[] buf;
-	buf = strdup(s.buf);
+		delete[] buf;
+		buf = strdup(s.buf);
 	
 	}
 	return *this;
@@ -98,7 +98,7 @@ int String::indexOf(char c) const {
 }
 
 //rework this function
-int String::indexOf(String s) const {
+int String::indexOf(const String &s) const {
 	int len = this->size();
 	int sub = s.size();
 
