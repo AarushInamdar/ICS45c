@@ -64,7 +64,7 @@ int compare(Node* lhs, Node* rhs) {
 
 	while (lp!=nullptr && rp!=nullptr) {
 		if (lp->data != rp->data) {
-			return lp->data-rp->data;
+			return (lp->data-rp->data) > 0 ? 1: -1;
 		}
 		lp = lp->next;
 		rp = rp->next;
@@ -144,7 +144,7 @@ int index(Node* head, Node* node){
 	Node *p = head;
 	int i = 0;
 	int nodeLen = length(node);
-	while (compare(p, node, nodeLen) != 0 && p!=nullptr) {
+	while (compare(p, node, 2) != 0 && p->next!=nullptr) {
 		p= p->next;
 		i++;
 	}

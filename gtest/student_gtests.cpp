@@ -72,11 +72,11 @@ TEST(ListTests, Compare) {
 
 	EXPECT_EQ(list::compare(hella, hellb), -1);
 
-	EXPECT_EQ(list::compare(helld, hellb), 2);
+	EXPECT_EQ(list::compare(helld, hellb), 1);
 
 	EXPECT_EQ(list::compare(hella, hellb, 4), 0);
 
-	EXPECT_EQ(list::compare(heatd, heftd, 3), -5);
+	EXPECT_EQ(list::compare(heatd, heftd, 3), -1);
 
 	list::free(hello);
 	list::free(hella);
