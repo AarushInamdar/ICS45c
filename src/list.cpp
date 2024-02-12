@@ -34,7 +34,7 @@ void free(Node* head){
 // prints linked list to ostream out
 void print(std::ostream& out, Node* head) {
 	for (Node* p=head; p!= nullptr; p=p->next) {
-		out << p->data << ' ';
+		out << p->data;
 	}
 }
 // returns an exact duplicate of linked list starting at head

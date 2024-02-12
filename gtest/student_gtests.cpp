@@ -199,7 +199,7 @@ TEST(ListTests, FindList) {
 
 TEST(ListTests, Reverse) {
 	Node* longNode = list::from_string("HelloWorld");
-	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("dlroWolleH")), 96);
+	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("dlroWolleH")), 0);
 	std::cout << "Normal Reversed Hello World: ";
 	list::print(std::cout, list::from_string("dlroWolleH"));
 	std::cout << "\nReversed Function Hello World: ";
@@ -207,7 +207,7 @@ TEST(ListTests, Reverse) {
 
 
 	longNode = list::from_string("ZZZZ");
-	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 96);
+	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 0);
 	std::cout << "Reversed ZZZZ: ";
 	list::print(std::cout, list::reverse(longNode));
 
