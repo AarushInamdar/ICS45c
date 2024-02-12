@@ -195,14 +195,37 @@ TEST(ListTests, FindList) {
 
 
 
-/*
 
-TEST(ListTests, ReplaceMe) {
-    EXPECT_TRUE(false);
+
+TEST(ListTests, Reverse) {
+	Node* longNode = list::from_string("HelloWorld");
+	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("dlroWolleH")), 96);
+	std::cout << "Normal Reversed Hello World: ";
+	list::print(std::cout, list::from_string("dlroWolleH"));
+	std::cout << "\nReversed Function Hello World: ";
+	list::print(std::cout, list::reverse(longNode));
+
+
+	longNode = list::from_string("ZZZZ");
+	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 96);
+	std::cout << "Reversed ZZZZ: ";
+	list::print(std::cout, list::reverse(longNode));
+
+
+
+
+	
+	longNode = list::from_string("");
+	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("")), 0);
+
+	longNode = list::from_string("ZZZ");
+	EXPECT_NE(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 0);
+
+
 }
 
 
-
+/*
 
 // Add remaining tests below. All tests should follow
 // the format of `TEST(ListTests, <TestName>){}`.

@@ -18,7 +18,7 @@ Node* from_string(const char* s) {
 		p->next = new Node{.data=*s};
 		p = p->next;	
 		}
-	p = nullptr;	
+		
 	return head;
 }
 
@@ -66,6 +66,7 @@ int compare(Node* lhs, Node* rhs) {
 		lp = lp->next;
 		rp = rp->next;
 	}
+
 	if (lp==nullptr && rp==nullptr) {
 		return 0;
 	} else if (lp == nullptr) {
@@ -105,7 +106,21 @@ int length(Node* head) {
 
 // returns reversed copy of linked list
 Node* reverse(Node* head) {
-
+	Node* reversed = copy(head);
+	
+	Node* prev = nullptr;
+	Node* rp = reversed;
+	Node* next = nullptr;
+	
+	while (rp!= nullptr && rp->data != '\0') {
+		next = rp->next;
+		rp->next = prev;
+		prev = rp;
+		rp = next;
+	}
+	
+	return prev;
+	
 }
 
 
