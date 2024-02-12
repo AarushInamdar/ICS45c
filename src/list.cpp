@@ -143,7 +143,8 @@ int index(Node* head, Node* node){
 
 	Node *p = head;
 	int i = 0;
-	while (compare(p, node, 1) != 0 && p!=nullptr) {
+	int nodeLen = length(node);
+	while (compare(p, node, nodeLen) != 0 && p!=nullptr) {
 		p= p->next;
 		i++;
 	}
