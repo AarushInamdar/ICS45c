@@ -86,7 +86,7 @@ int compare(Node* lhs, Node* rhs, int n) {
 	
 	while (lp!=nullptr && rp!=nullptr && n!=0) {
 		if (lp->data != rp->data) {
-			return lp->data-rp->data;
+			return (lp->data-rp->data > 0) ? 1 : -1 ;
 		}
 		lp = lp->next;
 		rp = rp->next;
