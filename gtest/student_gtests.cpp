@@ -54,7 +54,10 @@ TEST(ListTests, Length) {
 
 
 TEST(ListTests, Compare) {
-    EXPECT_EQ(list::compare(list::from_string("hello"), list::from_string("hello")), 0);
+    
+
+
+	EXPECT_EQ(list::compare(list::from_string("hello"), list::from_string("hello")), 0);
 
 	EXPECT_EQ(list::compare(list::from_string("hella"), list::from_string("hellb")), -1);
 
@@ -86,6 +89,11 @@ TEST(ListTests, Copy) {
 	Node* myExtreme = list::copy(extreme);
 	EXPECT_EQ(list::compare(extreme, myExtreme), 0);
 
+	list::free(head);
+	list::free(myNode);
+	list::free(extreme);
+	list::free(myExtreme);
+
 }
 
 
@@ -109,6 +117,13 @@ TEST(ListTests, Append) {
 
 	EXPECT_NE(list::compare(hwb, hwo), 0);
 
+
+	list::free(hw);
+	list::free(hwa);
+	list::free(hwb);
+	list::free(hwo);
+
+
 }
 
 TEST(ListTests, Last) {
@@ -127,6 +142,10 @@ TEST(ListTests, Last) {
 	Node* hwZ = list::from_string("helloworldZ");
 	EXPECT_NE(list::compare(last(hwZ), list::from_string("Zd")),0);
 
+	list::free(hw);
+	list::free(hwZ);
+	list::free(nothing);
+
 }
 
 
@@ -135,16 +154,20 @@ TEST(ListTests, Last) {
 TEST(ListTests, Nth) {
     Node* myNode = list::from_string("HelloWorld");
 	
-	Node* myP = list::nth(myNode, 3);
+	Node* myP = list::nth(myNode, 2);
 	EXPECT_EQ(myP->data, 'l');
 
 
-	myP = list::nth(myNode, 6);
+	myP = list::nth(myNode, 5);
 	EXPECT_EQ(myP->data, 'W');
 
 
-	myP = list::nth(myNode, 1);
+	myP = list::nth(myNode, 0);
 	EXPECT_EQ(myP->data, 'H');
+
+
+
+	list::free(myNode);
 
 }
 
@@ -159,6 +182,10 @@ TEST(ListTests, Index) {
 
 	shortNode = list::from_string("el");
 	EXPECT_EQ(index(longNode, shortNode), 1);
+
+	list::free(longNode);
+	list::free(shortNode);
+
 }
 
 
@@ -175,6 +202,9 @@ TEST(ListTests, FindChar) {
 	myChar = 'z';
 	EXPECT_EQ(list::find_char(longNode, myChar), nullptr);
 
+	list::free(longNode);
+
+
 
 }
 
@@ -190,6 +220,9 @@ TEST(ListTests, FindList) {
 
 	shortNode = list::from_string("z");
 	EXPECT_EQ(list::find_list(longNode, shortNode), nullptr);
+	
+	list::free(longNode);
+	list::free(shortNode);
 
 }
 
@@ -220,6 +253,9 @@ TEST(ListTests, Reverse) {
 
 	longNode = list::from_string("ZZZ");
 	EXPECT_NE(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 0);
+
+
+	list::free(longNode);
 
 
 }

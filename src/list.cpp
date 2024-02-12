@@ -186,7 +186,7 @@ Node* find_list(Node* haystack, Node* needle) {
 // get the nth node of linked list
 Node* nth(Node* head, int n){
 	Node* p = head;
-	int i = 1;
+	int i = 0;
 	while (i!=n && p!=nullptr) {
 		p = p->next;
 		i++;
