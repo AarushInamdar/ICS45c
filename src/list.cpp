@@ -73,9 +73,9 @@ int compare(Node* lhs, Node* rhs) {
 	if (lp==nullptr && rp==nullptr) {
 		return 0;
 	} else if (lp == nullptr) {
-		return 'a'-rp->data-1;
+		return -1;
 	} else {
-		return lp->data-'a'+1;
+		return 1;
 	}
 }
 
