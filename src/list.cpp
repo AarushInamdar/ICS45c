@@ -12,12 +12,15 @@ Node* from_string(const char* s) {
 
 	Node* head = new Node{.data=*s};	
 	Node* p = head;
+	++s;
 	
 	while (*s!='\0') {
-		++s;
+		
 		p->next = new Node{.data=*s};
-		p = p->next;	
+		p = p->next;
+		++s;
 		}
+	p->next = nullptr;
 		
 	return head;
 }
@@ -100,7 +103,7 @@ int length(Node* head) {
 	for (Node*p = head; p!=nullptr; p=p->next) {
 		++res;
 	}
-	return res-1;
+	return res;
 }
 
 
@@ -140,7 +143,7 @@ int index(Node* head, Node* node){
 
 	Node *p = head;
 	int i = 0;
-	while (compare(p, node) != 0 && p!=nullptr) {
+	while (compare(p, node, 1) != 0 && p!=nullptr) {
 		p= p->next;
 		i++;
 	}
@@ -201,7 +204,7 @@ Node* last(Node* head){
 
 	Node* rabbit = head;
 	
-	while (rabbit->next->next != nullptr) {
+	while (rabbit->next != nullptr) {
 		rabbit = rabbit->next;
 	}
 	return rabbit;

@@ -23,13 +23,13 @@ TEST(ListTests, FromStringBasic) {
     foo_list = foo_list->next;
     EXPECT_EQ(foo_list->data, 'o');
     
-	/*ASSERT_EQ(foo_list->next, nullptr);
+	ASSERT_EQ(foo_list->next, nullptr);
 
 
 	Node* const emptyStringHead = list::from_string("");
 	Node* eString = emptyStringHead;
 
-	EXPECT_EQ(eString->data, nullptr);*/
+	EXPECT_EQ(eString, nullptr);
 	
 	
     list::free(foo_list_head);
@@ -55,20 +55,35 @@ TEST(ListTests, Length) {
 
 TEST(ListTests, Compare) {
     
-
-
-	EXPECT_EQ(list::compare(list::from_string("hello"), list::from_string("hello")), 0);
-
-	EXPECT_EQ(list::compare(list::from_string("hella"), list::from_string("hellb")), -1);
-
-	EXPECT_EQ(list::compare(list::from_string("helld"), list::from_string("hellb")), 2);
-
-	EXPECT_EQ(list::compare(list::from_string("hella"), list::from_string("hellb"), 4), 0);
-
-	EXPECT_EQ(list::compare(list::from_string("heatd"), list::from_string("heftd"), 3), -5);
+	Node* hello = list::from_string("hello");
+	Node* hella = list::from_string("hella");
+	Node* hellb = list::from_string("hellb");
+	Node* helld = list::from_string("helld");
+	Node* heatd = list::from_string("heatd");
+	Node* heftd = list::from_string("heftd");
 
 
 
+
+
+
+
+	EXPECT_EQ(list::compare(hello, hello), 0);
+
+	EXPECT_EQ(list::compare(hella, hellb), -1);
+
+	EXPECT_EQ(list::compare(helld, hellb), 2);
+
+	EXPECT_EQ(list::compare(hella, hellb, 4), 0);
+
+	EXPECT_EQ(list::compare(heatd, heftd, 3), -5);
+
+	list::free(hello);
+	list::free(hella);
+	list::free(hellb);
+	list::free(helld);
+	list::free(heatd);
+	list::free(heftd);
 }
 
 
@@ -76,11 +91,7 @@ TEST(ListTests, Copy) {
     Node* const head = list::from_string("foo");
 	Node* myNode = list::copy(head);
 	
-	std::cout << "head: " << std::endl;
-	list::print(std::cout, head);
-	std::cout<< "\nmyNode: "  << std::endl;
-	list::print(std::cout, myNode);
-	
+		
 	EXPECT_EQ(list::compare(head, myNode), 0);
 
 
@@ -97,38 +108,11 @@ TEST(ListTests, Copy) {
 }
 
 
-
-
-TEST(ListTests, Append) {
-    
-	Node* hwa = list::append(list::from_string("hello"), list::from_string("world"));
-	Node* hw = list::from_string("helloworld");
-	std::cout << "Hwa: " << std::endl;
-	list::print(std::cout, hwa);
-	std::cout << "Hw: helloworld" << std::endl;
-
-
-	EXPECT_EQ(list::compare(hwa, hw), 0);
-
-
-
-	Node* hwb = list::append(list::from_string("hi"), list::from_string("world"));
-	Node* hwo = list::from_string("helloworld");
-
-	EXPECT_NE(list::compare(hwb, hwo), 0);
-
-
-	list::free(hw);
-	list::free(hwa);
-	list::free(hwb);
-	list::free(hwo);
-
-
-}
-
 TEST(ListTests, Last) {
     Node* hw = list::from_string("helloworld");
-	EXPECT_EQ(list::compare(last(hw), list::from_string("d")),0);
+	Node* lastd = list::from_string("d");
+
+	EXPECT_EQ(list::compare(last(hw), lastd),0);
 	std::cout << "Function Last: " << std::endl;
 	
 	list::print(std::cout, last(hw));
@@ -140,13 +124,50 @@ TEST(ListTests, Last) {
 
 
 	Node* hwZ = list::from_string("helloworldZ");
-	EXPECT_NE(list::compare(last(hwZ), list::from_string("Zd")),0);
+	Node* lastZd = list::from_string("Zd");
+	EXPECT_NE(list::compare(last(hwZ), lastZd),0);
 
 	list::free(hw);
 	list::free(hwZ);
 	list::free(nothing);
+	list::free(lastd);
+	list::free(lastZd);
 
 }
+
+
+TEST(ListTests, Append) {
+    
+Node* hello = list::from_string("hello");
+Node* world = list::from_string("world");
+
+	Node* hwa = list::append(hello, world);
+	Node* hw = list::from_string("helloworld");
+	std::cout << "Hwa: " << std::endl;
+	list::print(std::cout, hwa);
+	std::cout << "Hw: helloworld" << std::endl;
+
+
+	EXPECT_EQ(list::compare(hwa, hw), 0);
+
+	Node* hi = list::from_string("hi");
+	
+	Node* hwb = list::append(hi, world);
+	
+
+	EXPECT_NE(list::compare(hwb, hwa), 0);
+
+
+	list::free(hw);
+	list::free(hwa);
+	list::free(hwb);
+	list::free(hello);
+	list::free(world);
+	list::free(hi);
+
+
+}
+
 
 
 
@@ -158,12 +179,12 @@ TEST(ListTests, Nth) {
 	EXPECT_EQ(myP->data, 'l');
 
 
-	myP = list::nth(myNode, 5);
-	EXPECT_EQ(myP->data, 'W');
+	Node* myPa = list::nth(myNode, 5);
+	EXPECT_EQ(myPa->data, 'W');
 
 
-	myP = list::nth(myNode, 0);
-	EXPECT_EQ(myP->data, 'H');
+	Node* myPb = list::nth(myNode, 0);
+	EXPECT_EQ(myPb->data, 'H');
 
 
 
@@ -171,92 +192,129 @@ TEST(ListTests, Nth) {
 
 }
 
+
+
 TEST(ListTests, Index) {
     Node* longNode = list::from_string("HelloWorld");
 	Node* shortNode = list::from_string("World");
 
 	EXPECT_EQ(index(longNode, shortNode), 5);
 
-	shortNode = list::from_string("d");
-	EXPECT_EQ(index(longNode, shortNode), 9);
+	Node* shortNodeD = list::from_string("d");
+	
+	EXPECT_EQ(index(longNode, shortNodeD), 9);
 
-	shortNode = list::from_string("el");
-	EXPECT_EQ(index(longNode, shortNode), 1);
+	Node* shortNodeEl = list::from_string("el");
+	EXPECT_EQ(index(longNode, shortNodeEl), 1);
 
 	list::free(longNode);
 	list::free(shortNode);
+	list::free(shortNodeD);
+	list::free(shortNodeEl);
 
 }
 
 
 TEST(ListTests, FindChar) {
     Node* longNode = list::from_string("HelloWorld");
-	
 	char myChar = 'W';
-	EXPECT_EQ(list::compare(list::find_char(longNode, myChar), list::from_string("World")), 0);
+
+	Node* findWorld = list::find_char(longNode, myChar);
+	Node* world = list::from_string("World");
+	EXPECT_EQ(list::compare(findWorld, world), 0);
+
+	
 
 	myChar = 'r';
-	EXPECT_EQ(list::compare(list::find_char(longNode, myChar), list::from_string("rld")), 0);
-	EXPECT_NE(list::compare(list::find_char(longNode, myChar), list::from_string("World")), 0);
+	Node* findR = list::find_char(longNode, myChar);
+	Node* rld = list::from_string("rld");
+
+	EXPECT_EQ(list::compare(findR, rld), 0);
+	EXPECT_NE(list::compare(findR, world), 0);
+
+	
 
 	myChar = 'z';
-	EXPECT_EQ(list::find_char(longNode, myChar), nullptr);
+	Node* nothing = list::find_char(longNode, myChar);
+	EXPECT_EQ(nothing, nullptr);
+
+	
+
 
 	list::free(longNode);
-
-
+	list::free(world);
+	list::free(rld);
+	list::free(nothing);
 
 }
+
+
 
 TEST(ListTests, FindList) {
     Node* longNode = list::from_string("HelloWorld");
-	
 	Node* shortNode = list::from_string("oWor");
-	EXPECT_EQ(list::compare(list::find_list(longNode, shortNode), list::from_string("oWorld")), 0);
 
-	shortNode = list::from_string("rld");
-	EXPECT_EQ(list::compare(list::find_list(longNode, shortNode), list::from_string("rld")), 0);
-	EXPECT_NE(list::compare(list::find_list(longNode, shortNode), list::from_string("World")), 0);
+	Node* res = list::find_list(longNode, shortNode);
+	Node* check = list::from_string("oWorld");
+	EXPECT_EQ(list::compare(res, check), 0);
 
-	shortNode = list::from_string("z");
-	EXPECT_EQ(list::find_list(longNode, shortNode), nullptr);
+
+	Node* shortNodeB = list::from_string("rld");
+	Node* res2 = list::find_list(longNode, shortNodeB);
+	Node* check2 = list::from_string("World");
+
+	EXPECT_EQ(list::compare(res2, shortNodeB), 0);
+	EXPECT_NE(list::compare(res2, check2), 0);
+
+	Node* shortNodeC = list::from_string("z");
+	Node* res3 = list::find_list(longNode, shortNodeC);
+	EXPECT_EQ(res3, nullptr);
 	
+	
+
 	list::free(longNode);
 	list::free(shortNode);
+	list::free(check);
+	list::free(shortNodeB);
+	list::free(check2);
+	list::free(shortNodeC);
+
+
 
 }
-
-
 
 
 
 TEST(ListTests, Reverse) {
 	Node* longNode = list::from_string("HelloWorld");
-	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("dlroWolleH")), 0);
-	std::cout << "Normal Reversed Hello World: ";
-	list::print(std::cout, list::from_string("dlroWolleH"));
-	std::cout << "\nReversed Function Hello World: ";
-	list::print(std::cout, list::reverse(longNode));
+	Node* reversedTest = list::from_string("dlroWolleH");
+	Node* reversal = list::reverse(longNode);
+
+	EXPECT_EQ(list::compare(reversal, reversedTest), 0);
 
 
-	longNode = list::from_string("ZZZZ");
-	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 0);
-	std::cout << "Reversed ZZZZ: ";
-	list::print(std::cout, list::reverse(longNode));
+	Node* longNode2 = list::from_string("ZZZZ");
+	Node* reversedTest2 = list::from_string("ZZZZ");
+	Node* reversal2 = list::reverse(longNode2);
 
-
-
+	EXPECT_EQ(list::compare(reversal2, reversedTest2), 0);
 
 	
-	longNode = list::from_string("");
-	EXPECT_EQ(list::compare(list::reverse(longNode), list::from_string("")), 0);
-
-	longNode = list::from_string("ZZZ");
-	EXPECT_NE(list::compare(list::reverse(longNode), list::from_string("ZZZZ")), 0);
+	Node* longNode3 = list::from_string("");
+	Node* reversedTest3= list::from_string("");
+	Node* reversal3 = list::reverse(longNode);
+	EXPECT_EQ(list::compare(reversal3, reversedTest), 0);
 
 
 	list::free(longNode);
-
+	list::free(reversedTest);
+	list::free(reversal);
+	list::free(longNode2);
+	list::free(reversedTest2);
+	list::free(reversal2);
+	list::free(longNode3);
+	list::free(reversedTest3);
+	list::free(reversal3);
 
 }
 
