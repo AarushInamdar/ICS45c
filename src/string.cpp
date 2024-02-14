@@ -1,6 +1,7 @@
 #include <iostream>
 #include "string.hpp"
 
+//notes to get the rest of the points: fix append, fix index, fix move, free memory wherever needed, 
 
 // constructs this string from a C string, defaults to empty string
  String::String(const char *s) {
@@ -51,7 +52,12 @@ bool String::in_bounds(int index) const {
 
 // allow const indexing
 char String::operator[](int index) const {
-	return (in_bounds(index)) ? list::nth(head, index)->data : '\0';
+	if (in_bounds(index)) {
+		return list::nth(head,index)->data;
+	} else {
+		return *"ERROR";
+	}
+	//return (in_bounds(index)) ? list::nth(head, index)->data : '\0';
 }
 
 // returns the logical length of this string (# of chars up to '\0')

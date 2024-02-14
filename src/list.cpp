@@ -186,6 +186,7 @@ Node* append(Node* lhs, Node* rhs) {
 	
 	Node* lc = copy(lhs);
 	Node* rc = copy(rhs);
+	
 	if (lhs == nullptr) return rc;
 
 	last(lc)->next = rc;
