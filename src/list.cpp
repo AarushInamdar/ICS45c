@@ -39,6 +39,7 @@ void print(std::ostream& out, Node* head) {
 		out << p->data;
 	}
 }
+
 // returns an exact duplicate of linked list starting at head
 Node* copy(Node* head) {
 	if (head!=nullptr) {
@@ -194,7 +195,7 @@ Node* append(Node* lhs, Node* rhs) {
 
 // returns index of node in list starting at head
 int index(Node* head, Node* node){
-	if (head == nullptr || node==nullptr) return -1;
+	if (head == nullptr) return -1;
 	
 	Node* p = head;
 	int index = 0;
