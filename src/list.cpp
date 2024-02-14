@@ -63,8 +63,8 @@ int compare(Node* lhs, Node* rhs) {
 	Node* rp = rhs;
 
 	while (lp!=nullptr && rp!=nullptr) {
-		if (lp->data != rp->data) {
-			return (lp->data-rp->data) > 0 ? 1 : -1;
+		if (lp->data-rp->data!=0) {
+			return ((lp->data-rp->data) > 0) ? 1 : -1;
 		}
 		lp = lp->next;
 		rp = rp->next;
@@ -81,18 +81,55 @@ int compare(Node* lhs, Node* rhs) {
 
 // similar to strncmp but for lists
 int compare(Node* lhs, Node* rhs, int n) {
+	
 	Node* lp = lhs;
 	Node* rp = rhs;
-	
-	while (lp!=nullptr && rp!=nullptr && n>0) {
+
+	while (lp && rp && n >0) {
 		if (lp->data != rp->data) {
+			//std::cout << "LP: " << lp->data << " RP: " << rp->data << " n: " << n << std::endl;
+
+			return ((lp->data-rp->data) > 0) ? 1 : -1;
+		} else {
+			//std::cout << "LP: " << lp->data << " RP: " << rp->data << " n: " << n << std::endl;
+
+			lp = lp->next;
+			rp = rp->next;
+			n--;
+		}
+	}
+	if (!lp && !rp) {
+		return 0;
+	} else if (!rp) {
+		return 1;
+	} else if (!lp) {
+		return -1;
+	} else {
+		return 0;
+	}
+
+	/*Node* lp = lhs;
+	Node* rp = rhs;
+	int i = 0;
+	
+	while (lp!=nullptr && rp!=nullptr && i<n) {
+		if (lp->data != rp->data) {
+			std::cout << "LP: " << lp->data << " RP: " << rp->data << std::endl;
 			return (lp->data-rp->data > 0) ? 1 : -1 ;
 		}
 		lp = lp->next;
 		rp = rp->next;
-		n--;
+		++i;
 	}
-	return 0 ;
+	if ((lp==nullptr && rp==nullptr)) {
+		return 0;
+	} else if (lp == nullptr) {
+		return -1;
+	} else if (rp == nullptr) {
+		return 1;
+	} else {
+		return ((lp->data-rp->data) > 0) ? 1 : -1;
+	}*/
 }
 
 // counts number of nodes in linked list
@@ -130,9 +167,11 @@ Node* reverse(Node* head) {
 
 // returns new list containing all nodes of lhs followed by all nodes of rhs
 Node* append(Node* lhs, Node* rhs) {
+	
 	Node* lc = copy(lhs);
 	Node* rc = copy(rhs);
-	
+	if (lhs == nullptr) return rc;
+
 	last(lc)->next = rc;
 
 	return lc;
@@ -144,7 +183,7 @@ int index(Node* head, Node* node){
 	Node *p = head;
 	int i = 0;
 	int nodeLen = length(node);
-	while (compare(p, node, 2) != 0 && p->next!=nullptr) {
+	while (compare(p, node, 1) != 0 && p->next!=nullptr) {
 		p= p->next;
 		i++;
 	}
@@ -168,20 +207,32 @@ Node* find_char(Node* head, char c) {
 
 // similar to strstr but for two linked lists
 Node* find_list(Node* haystack, Node* needle) {
+	
 	Node* pH = haystack;
 	Node* pN = needle;
 
-	int needleLen = length(needle);
+	const int needleLen = length(needle);
 
-	while (pH!=nullptr) {
-		if (compare(pH, pN, needleLen) == 0) {
+	Node* stopper = nth(haystack, length(needle));
+	bool found = false;
+	while (stopper!=nullptr || found == true) {
+		if (compare(pN, pH, needleLen) == 0) {
+			print(std::cout, pH);
+			std::cout << std::endl;
 			return pH;
-		}
+			break;
+		} else {
+		//std::cout << "Currently the comparison is: " << std::endl;
+		//print(std::cout, pH);
+		//std::cout << std::endl;
+
+		//std::cout << "comparison value: " << compare(pH, pN, needleLen) << std::endl;
+		//std::cout << "First Pointer: " << pH->data << " Second Pointer: " << stopper->data << std::endl;
 		pH = pH->next;
+		stopper = stopper->next;
+		}
 	}
-	return nullptr;
-
-
+	return (compare(pH, pN, needleLen) == 0) ? pH : nullptr;
 }
 
 
@@ -190,12 +241,28 @@ Node* find_list(Node* haystack, Node* needle) {
 // get the nth node of linked list
 Node* nth(Node* head, int n){
 	Node* p = head;
+	
+	int i = 1;
+	if (i==n) {
+		return p;
+	}
+	do {
+		p = p->next;
+		++i;
+	} while(i<n && p!=nullptr);
+	return p;
+	/*for (int i=1; i==n; ++i) {
+		p=p->next;
+	}
+	return p;*/
+		
+	/*
 	int i = 0;
-	while (i!=n && p!=nullptr) {
+	while (i<=n && p!=nullptr) {
 		p = p->next;
 		i++;
 	}
-	return p;
+	return p;*/
 }
 
 // get the last node of linked list

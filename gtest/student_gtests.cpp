@@ -59,13 +59,6 @@ TEST(ListTests, Compare) {
 	Node* hella = list::from_string("hella");
 	Node* hellb = list::from_string("hellb");
 	Node* helld = list::from_string("helld");
-	Node* heatd = list::from_string("heatd");
-	Node* heftd = list::from_string("heftd");
-
-
-
-
-
 
 
 	EXPECT_EQ(list::compare(hello, hello), 0);
@@ -74,7 +67,34 @@ TEST(ListTests, Compare) {
 
 	EXPECT_EQ(list::compare(helld, hellb), 1);
 
-	EXPECT_EQ(list::compare(hella, hellb, 4), 0);
+
+	list::free(hello);
+	list::free(hella);
+	list::free(hellb);
+	list::free(helld);
+}
+
+TEST(ListTests, CompareN) {
+    
+	Node* hello = list::from_string("hello");
+	Node* hella = list::from_string("hella");
+	Node* hellb = list::from_string("hellb");
+	Node* helld = list::from_string("helld");
+	Node* heatd = list::from_string("heatd");
+	Node* heftd = list::from_string("heftd");
+
+
+	EXPECT_EQ(list::compare(hello, hello, 5), 0);
+
+	
+	EXPECT_EQ(list::compare(hella, hellb, 5), -1);
+	//list::print(std::cout, hellb);
+	
+	EXPECT_EQ(list::compare(helld, hellb, 5), 1);
+	//list::print(std::cout, hellb);
+	
+	EXPECT_EQ(list::compare(hella, hellb, 3), 0);
+	//list::print(std::cout, hellb);
 
 	EXPECT_EQ(list::compare(heatd, heftd, 3), -1);
 
@@ -175,15 +195,15 @@ Node* world = list::from_string("world");
 TEST(ListTests, Nth) {
     Node* myNode = list::from_string("HelloWorld");
 	
-	Node* myP = list::nth(myNode, 2);
+	Node* myP = list::nth(myNode, 3);
 	EXPECT_EQ(myP->data, 'l');
 
 
-	Node* myPa = list::nth(myNode, 5);
+	Node* myPa = list::nth(myNode, 6);
 	EXPECT_EQ(myPa->data, 'W');
 
 
-	Node* myPb = list::nth(myNode, 0);
+	Node* myPb = list::nth(myNode, 1);
 	EXPECT_EQ(myPb->data, 'H');
 
 
@@ -252,19 +272,27 @@ TEST(ListTests, FindChar) {
 
 TEST(ListTests, FindList) {
     Node* longNode = list::from_string("HelloWorld");
-	Node* shortNode = list::from_string("oWor");
+	Node* shortNode = list::from_string("ello");
 
 	Node* res = list::find_list(longNode, shortNode);
-	Node* check = list::from_string("oWorld");
+	Node* check = list::from_string("elloWorld");
+	std::cout << "this is supposed to be oWorld: ";
+	list::print(std::cout, res);
+	std::cout << " " << std::endl;
 	EXPECT_EQ(list::compare(res, check), 0);
 
 
 	Node* shortNodeB = list::from_string("rld");
 	Node* res2 = list::find_list(longNode, shortNodeB);
 	Node* check2 = list::from_string("World");
+	std::cout << "this is supposed to be rld: ";
+	list::print(std::cout, res2);
+	std::cout << std::endl;
 
 	EXPECT_EQ(list::compare(res2, shortNodeB), 0);
 	EXPECT_NE(list::compare(res2, check2), 0);
+
+
 
 	Node* shortNodeC = list::from_string("z");
 	Node* res3 = list::find_list(longNode, shortNodeC);
@@ -282,7 +310,6 @@ TEST(ListTests, FindList) {
 
 
 }
-
 
 
 TEST(ListTests, Reverse) {
