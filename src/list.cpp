@@ -198,8 +198,7 @@ int index(Node* head, Node* node){
 	Node* p = head;
 	int index = 0;
 
-	while (p!=nullptr) {
-		print(std::cout, head);
+	while (p!=nullptr && head!=nullptr) {
 		if (compare(p, node) == 0) {
 			return index;
 		}
@@ -236,10 +235,10 @@ Node* find_char(Node* head, char c) {
 
 // similar to strstr but for two linked lists
 Node* find_list(Node* haystack, Node* needle) {
-	
+	if (haystack==nullptr) return nullptr;
 	Node* pH = haystack;
 	Node* pN = needle;
-
+	
 	const int needleLen = length(needle);
 
 	Node* stopper = nth(haystack, length(needle)-1);
@@ -247,7 +246,6 @@ Node* find_list(Node* haystack, Node* needle) {
 	while (stopper!=nullptr || found == true) {
 		if (compare(pN, pH, needleLen) == 0) {
 			return pH;
-			break;
 		} else {
 		pH = pH->next;
 		stopper = stopper->next;
