@@ -195,12 +195,8 @@ Node* append(Node* lhs, Node* rhs) {
 
 // returns index of node in list starting at head
 int index(Node* head, Node* node){
-	if (head == nullptr && node == nullptr){
-		return 0;
-		} else if (head == nullptr) {
-		return -1;
-		}
-	
+	if (head == nullptr && node==nullptr) return 0;
+			
 	Node* p = head;
 	int index = 0;
 
