@@ -88,9 +88,9 @@ int compare(Node* lhs, Node* rhs, int n) {
 		if (!lp && !rp) {
 			return 0;
 		} else if (!lp) {
-			return 1;
-		} else if (!rp) {
 			return -1;
+		} else if (!rp) {
+			return 1;
 		} else if (lp->data!=rp->data) {
 			return lp->data - rp->data;
 		}
