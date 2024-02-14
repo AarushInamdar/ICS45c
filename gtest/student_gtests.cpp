@@ -218,14 +218,19 @@ TEST(ListTests, Index) {
     Node* longNode = list::from_string("HelloWorld");
 	Node* shortNode = list::from_string("World");
 
-	EXPECT_EQ(index(longNode, shortNode), 5);
+	EXPECT_EQ(list::index(longNode, shortNode), 5);
 
 	Node* shortNodeD = list::from_string("d");
 	
-	EXPECT_EQ(index(longNode, shortNodeD), 9);
+	EXPECT_EQ(list::index(longNode, shortNodeD), 9);
 
 	Node* shortNodeEl = list::from_string("elloWorld");
-	EXPECT_EQ(index(longNode, shortNodeEl), 1);
+	EXPECT_EQ(list::index(longNode, shortNodeEl), 1);
+
+	Node* empty1 = list::from_string("");
+	Node* empty2 = list::from_string("");
+
+	EXPECT_EQ(list::index(empty1, empty2), 0);
 
 	list::free(longNode);
 	list::free(shortNode);
