@@ -1,3 +1,7 @@
+#include <iostream>
+using namespace std;
+
+
 // constructs this string from a C string, defaults to empty string
 explicit String::String(const char *s = "");
 

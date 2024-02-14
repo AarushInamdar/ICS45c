@@ -199,6 +199,7 @@ int index(Node* head, Node* node){
 	int index = 0;
 
 	while (p!=nullptr) {
+		print(std::cout, head);
 		if (compare(p, node) == 0) {
 			return index;
 		}
