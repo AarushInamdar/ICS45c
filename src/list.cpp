@@ -241,7 +241,7 @@ Node* find_list(Node* haystack, Node* needle) {
 
 	const int needleLen = length(needle);
 
-	Node* stopper = nth(haystack, length(needle));
+	Node* stopper = nth(haystack, length(needle)-1);
 	bool found = false;
 	while (stopper!=nullptr || found == true) {
 		if (compare(pN, pH, needleLen) == 0) {
@@ -270,7 +270,7 @@ Node* find_list(Node* haystack, Node* needle) {
 Node* nth(Node* head, int n){
 	Node* p = head;
 	
-	int i = 1;
+	int i = 0;
 	if (i==n) {
 		return p;
 	}

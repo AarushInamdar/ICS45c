@@ -195,15 +195,15 @@ Node* world = list::from_string("world");
 TEST(ListTests, Nth) {
     Node* myNode = list::from_string("HelloWorld");
 	
-	Node* myP = list::nth(myNode, 3);
+	Node* myP = list::nth(myNode, 2);
 	EXPECT_EQ(myP->data, 'l');
 
 
-	Node* myPa = list::nth(myNode, 6);
+	Node* myPa = list::nth(myNode, 5);
 	EXPECT_EQ(myPa->data, 'W');
 
 
-	Node* myPb = list::nth(myNode, 1);
+	Node* myPb = list::nth(myNode, 0);
 	EXPECT_EQ(myPb->data, 'H');
 
 
