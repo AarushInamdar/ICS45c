@@ -245,17 +245,9 @@ Node* find_list(Node* haystack, Node* needle) {
 	bool found = false;
 	while (stopper!=nullptr || found == true) {
 		if (compare(pN, pH, needleLen) == 0) {
-			print(std::cout, pH);
-			std::cout << std::endl;
 			return pH;
 			break;
 		} else {
-		//std::cout << "Currently the comparison is: " << std::endl;
-		//print(std::cout, pH);
-		//std::cout << std::endl;
-
-		//std::cout << "comparison value: " << compare(pH, pN, needleLen) << std::endl;
-		//std::cout << "First Pointer: " << pH->data << " Second Pointer: " << stopper->data << std::endl;
 		pH = pH->next;
 		stopper = stopper->next;
 		}
