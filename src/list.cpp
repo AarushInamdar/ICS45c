@@ -10,18 +10,17 @@ Node* from_string(const char* s) {
 		return nullptr;
 	}
 
-	Node* head = new Node{.data=*s};	
+	Node* head = new Node{.data=*s, .next=nullptr};	
 	Node* p = head;
 	++s;
 	
 	while (*s!='\0') {
 		
-		p->next = new Node{.data=*s};
+		p->next = new Node{.data=*s, .next=nullptr};
 		p = p->next;
 		++s;
 		}
-	p->next = nullptr;
-		
+			
 	return head;
 }
 
@@ -43,7 +42,7 @@ void print(std::ostream& out, Node* head) {
 // returns an exact duplicate of linked list starting at head
 Node* copy(Node* head) {
 	if (head!=nullptr) {
-		Node* newHead = new Node{.data=head->data};
+		Node* newHead = new Node{.data=head->data, .next=nullptr};
 		Node* myPointer = newHead;	
 		for (Node* p=head->next; p!=nullptr; p = p->next) {
 			newHead->next = new Node{.data=p->data, .next=nullptr};
@@ -64,7 +63,7 @@ int compare(Node* lhs, Node* rhs) {
 
 	while (lp!=nullptr && rp!=nullptr) {
 		if (lp->data-rp->data!=0) {
-			return ((lp->data-rp->data) > 0) ? 1 : -1;
+			return lp->data-rp->data;
 		}
 		lp = lp->next;
 		rp = rp->next;
@@ -73,9 +72,9 @@ int compare(Node* lhs, Node* rhs) {
 	if (lp==nullptr && rp==nullptr) {
 		return 0;
 	} else if (lp == nullptr) {
-		return -1;
+		return 'a'-rp->data+1;
 	} else {
-		return 1;
+		return lp->data-'a'+1;
 	}
 }
 
@@ -84,8 +83,27 @@ int compare(Node* lhs, Node* rhs, int n) {
 	
 	Node* lp = lhs;
 	Node* rp = rhs;
+	
+	for (int i = 0; i<n; i++) {
+		if (!lp && !rp) {
+			return 0;
+		}
+		if (!lp) {
+			return lp->data-'a'+1;
+		}
+		if (!rp) {
+			return 'a'-rp->data-1;
+		}
+		if (lp->data!=rp->data) {
+			return lp->data - rp->data;
+		}
 
-	while (lp && rp && n >0) {
+		lp=lp->next;
+		rp = rp->next;
+	}
+	return 0;
+
+	/*while (lp && rp && n >0) {
 		if (lp->data != rp->data) {
 			//std::cout << "LP: " << lp->data << " RP: " << rp->data << " n: " << n << std::endl;
 
@@ -106,7 +124,7 @@ int compare(Node* lhs, Node* rhs, int n) {
 		return -1;
 	} else {
 		return 0;
-	}
+	}*/
 
 	/*Node* lp = lhs;
 	Node* rp = rhs;
@@ -179,15 +197,28 @@ Node* append(Node* lhs, Node* rhs) {
 
 // returns index of node in list starting at head
 int index(Node* head, Node* node){
+	
+	Node* p = head;
+	int index = 0;
 
+	while (p!=nullptr) {
+		if (compare(p, node) == 0) {
+			return index;
+		}
+		p = p->next;
+		++index;
+	}
+	return -1;
+
+	/*
 	Node *p = head;
 	int i = 0;
 	int nodeLen = length(node);
-	while (compare(p, node, 1) != 0 && p->next!=nullptr) {
-		p= p->next;
-		i++;
+	Node* ahead = nth(head, nodeLen);
+	for (int i=0; compare(p,node,nodeLen-i)==0 || ahead!=nullptr; ++i) {
+		p = p->next;
 	}
-	return i;
+	return i;*/
 }
 
 // similar to strchr but for a linked list
@@ -232,7 +263,7 @@ Node* find_list(Node* haystack, Node* needle) {
 		stopper = stopper->next;
 		}
 	}
-	return (compare(pH, pN, needleLen) == 0) ? pH : nullptr;
+	return nullptr;
 }
 
 
