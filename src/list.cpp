@@ -72,9 +72,9 @@ int compare(Node* lhs, Node* rhs) {
 	if (lp==nullptr && rp==nullptr) {
 		return 0;
 	} else if (lp == nullptr) {
-		return 'a'-rp->data+1;
+		return -1;
 	} else {
-		return lp->data-'a'+1;
+		return 1;
 	}
 }
 
@@ -87,14 +87,11 @@ int compare(Node* lhs, Node* rhs, int n) {
 	for (int i = 0; i<n; i++) {
 		if (!lp && !rp) {
 			return 0;
-		}
-		if (!lp) {
-			return lp->data-'a'+1;
-		}
-		if (!rp) {
-			return 'a'-rp->data-1;
-		}
-		if (lp->data!=rp->data) {
+		} else if (!lp) {
+			return 1;
+		} else if (!rp) {
+			return -1;
+		} else if (lp->data!=rp->data) {
 			return lp->data - rp->data;
 		}
 
