@@ -25,7 +25,7 @@ Node* from_string(const char* s) {
 }
 
 // deletes all nodes of linked list
-void free(Node* head){
+void free(Node* head) {
 	while (head!=nullptr) {
 		Node* nextNode = head->next;
 		delete head;

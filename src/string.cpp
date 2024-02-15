@@ -22,6 +22,7 @@ String::String(const String &s) {
 String::String(String &&s) {
 	head = s.head;
 	s.head=nullptr;
+	list::free(s.head);
 }
 
 // swap this string with s
@@ -29,6 +30,7 @@ void String::swap(String &s) {
 	list::Node* temp = s.head;
 	s.head = head;
 	head = temp;
+
 }
 
 // assignment operator from one string, s, to this string
