@@ -191,7 +191,7 @@ Node* append(Node* lhs, Node* rhs) {
 
 	last(lc)->next = rc;
 
-	return copy(lc); //if new is a must have you can return copy of lhs
+	return lc; //if new is a must have you can return copy of lhs
 }
 
 // returns index of node in list starting at head
