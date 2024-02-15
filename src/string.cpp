@@ -4,7 +4,12 @@
 //notes to get the rest of the points: 1. fix append, 2. fix index, 3. fix move, 4. free memory wherever needed after all that 
 
 // constructs this string from a C string, defaults to empty string
- String::String(const char *s) {
+String::String(list::Node* head) {
+	this->head = head;
+}
+
+
+String::String(const char *s) {
 	head = list::from_string(s);
 }
 
@@ -80,7 +85,7 @@ int String::indexOf(char c) const {
 
 // returns index into this string for first occurrence of s
 int String::indexOf(const String &s) const {
-	return list::index(this->head, list::find_list(this->head,s.head));
+	return list::index(this->head, list::find_list(this->head,s.head));//find list might be source of issue here
 }
 
 // compare this string with another string by equality
