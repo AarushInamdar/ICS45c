@@ -221,7 +221,6 @@ int index(Node* head, Node* node){
 
 // similar to strchr but for a linked list
 Node* find_char(Node* head, char c) {
-	if (head ==nullptr) return nullptr;
 	Node *p = head;
 
 	while (p!=nullptr) {
@@ -237,7 +236,6 @@ Node* find_char(Node* head, char c) {
 
 // similar to strstr but for two linked lists
 Node* find_list(Node* haystack, Node* needle) {
-	if (haystack==nullptr) return nullptr;
 	Node* pH = haystack;
 	Node* pN = needle;
 	
