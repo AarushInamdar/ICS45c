@@ -1,7 +1,7 @@
 #include <iostream>
 #include "string.hpp"
 
-//notes to get the rest of the points: fix append, fix index, fix move, free memory wherever needed, 
+//notes to get the rest of the points: 1. fix append, 2. fix index, 3. fix move, 4. free memory wherever needed after all that 
 
 // constructs this string from a C string, defaults to empty string
  String::String(const char *s) {
@@ -13,9 +13,9 @@ String::String(const String &s) {
 	head = list::copy(s.head);
 }
 
-// construct this string by moving from string s
+// construct this string by moving from string s MOVE
 String::String(String &&s) {
-	head = s.head;
+	head = copy(s.head);
 	list::free(s.head);
 }
 
@@ -104,6 +104,7 @@ std::strong_ordering String::operator<=>(const String &s) const {
 String String::operator+(const String &s) const{
 	String a;
 	a.head = list::append(list::copy(this->head), s.head);
+	list::free(head);
 	return a;
 }
 
@@ -119,7 +120,7 @@ void String::print(std::ostream &out) const {
     // read next word into this string
     // hint: use operator >> to read from in into a temporary buffer
 void String::read(std::istream &in) {
-	char myIn[3005];
+	char myIn[9999];
 	in >> myIn;
 	list::free(head);
 	head = list::from_string(myIn);
@@ -128,7 +129,7 @@ void String::read(std::istream &in) {
 // print this string, hint: use operator << to send buf to out
 
 String::~String() {
-	free(head);
+	free(this->head);
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {
