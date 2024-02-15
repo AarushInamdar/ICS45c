@@ -15,8 +15,8 @@ String::String(const String &s) {
 
 // construct this string by moving from string s MOVE
 String::String(String &&s) {
-	head = copy(s.head);
-	list::free(s.head);
+	list::free(head);
+	head = s.head;
 }
 
 // swap this string with s
