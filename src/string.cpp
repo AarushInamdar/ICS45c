@@ -103,7 +103,7 @@ std::strong_ordering String::operator<=>(const String &s) const {
 // concatenate this and s to form a return string
 String String::operator+(const String &s) const{
 	String a;
-	a.head = list::append(list::copy(this->head), s.head);
+	a.head = list::append(this->head, s.head);
 	list::free(head);
 	return a;
 }
