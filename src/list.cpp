@@ -206,7 +206,7 @@ int index(Node* head, Node* node){
 		p = p->next;
 		++index;
 	}
-	return (head!= nullptr && node != nullptr) ? -1 : 0;
+	return -1;
 
 	/*
 	Node *p = head;
