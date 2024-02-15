@@ -137,7 +137,7 @@ void String::read(std::istream &in) {
 // print this string, hint: use operator << to send buf to out
 
 String::~String() {
-	list::free(head);
+	list::free(this->head);
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {

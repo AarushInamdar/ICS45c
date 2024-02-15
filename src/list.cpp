@@ -236,7 +236,7 @@ Node* find_char(Node* head, char c) {
 
 // similar to strstr but for two linked lists
 Node* find_list(Node* haystack, Node* needle) {
-	if (haystack == nullptr) return nullptr;
+	if (haystack == nullptr || needle == nullptr) return nullptr;
 	Node* pH = haystack;
 	Node* pN = needle;
 	
