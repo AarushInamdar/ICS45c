@@ -55,7 +55,8 @@ char String::operator[](int index) const {
 	if (in_bounds(index)) {
 		return list::nth(head,index)->data;
 	} else {
-		return *"ERROR";
+		std::cout << "ERROR: Index not in bounds"<< std::endl;
+		return '\0';
 	}
 	//return (in_bounds(index)) ? list::nth(head, index)->data : '\0';
 }
