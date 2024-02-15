@@ -236,7 +236,7 @@ Node* find_char(Node* head, char c) {
 
 // similar to strstr but for two linked lists
 Node* find_list(Node* haystack, Node* needle) {
-	if (haystack == nullptr || needle == nullptr) return nullptr;
+	if (haystack == nullptr) return nullptr;
 	Node* pH = haystack;
 	Node* pN = needle;
 	
@@ -271,19 +271,7 @@ Node* nth(Node* head, int n){
 		++i;
 	} while(i<n && p!=nullptr);
 	return p;
-	/*for (int i=1; i==n; ++i) {
-		p=p->next;
 	}
-	return p;*/
-		
-	/*
-	int i = 0;
-	while (i<=n && p!=nullptr) {
-		p = p->next;
-		i++;
-	}
-	return p;*/
-}
 
 // get the last node of linked list
 Node* last(Node* head){
