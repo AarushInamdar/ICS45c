@@ -105,7 +105,7 @@ std::strong_ordering String::operator<=>(const String &s) const {
 String String::operator+(const String &s) const{
 	String a;
 	a.head = list::append(this->head, s.head);
-	//list::free(head);
+	list::free(head);
 	return a;
 }
 
@@ -130,7 +130,7 @@ void String::read(std::istream &in) {
 // print this string, hint: use operator << to send buf to out
 
 String::~String() {
-	free(this->head);
+	list::free(head);
 }
 
 std::ostream &operator<<(std::ostream &out, const String &s) {
