@@ -105,7 +105,7 @@ std::strong_ordering String::operator<=>(const String &s) const {
 String String::operator+(const String &s) const{
 	String a;
 	a.head = list::append(this->head, s.head);
-	list::free(head);
+	//list::free(head);
 	return a;
 }
 
