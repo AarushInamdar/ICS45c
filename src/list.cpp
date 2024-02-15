@@ -206,7 +206,7 @@ int index(Node* head, Node* node){
 		p = p->next;
 		++index;
 	}
-	return -1;
+	return (head!=node) ? -1 : 0;
 
 	/*
 	Node *p = head;
@@ -221,6 +221,7 @@ int index(Node* head, Node* node){
 
 // similar to strchr but for a linked list
 Node* find_char(Node* head, char c) {
+	if (head ==nullptr) return nullptr;
 	Node *p = head;
 
 	while (p!=nullptr) {
