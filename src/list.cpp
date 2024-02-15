@@ -196,11 +196,6 @@ Node* append(Node* lhs, Node* rhs) {
 
 // returns index of node in list starting at head
 int index(Node* head, Node* node){
-	if (head ==nullptr && node==nullptr) {
-		return 0;
-	} else if (head==nullptr) {
-		return -1;
-	}
 	Node* p = head;
 	int index = 0;
 
@@ -226,7 +221,6 @@ int index(Node* head, Node* node){
 
 // similar to strchr but for a linked list
 Node* find_char(Node* head, char c) {
-	if (head==nullptr) return nullptr;
 	Node *p = head;
 
 	while (p!=nullptr) {
