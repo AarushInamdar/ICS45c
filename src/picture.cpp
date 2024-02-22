@@ -47,7 +47,14 @@ Picture& Picture::operator=(const Picture& other) {
 }
 
 Picture& Picture::operator=(Picture&& other) {
-	
+	if (this != &other) {
+		this->head = other.head;
+		this->tail = other.tail;
+
+		other.head = nullptr;
+		other.tail= nullptr;
+	}
+	return *this;
 }
 
 // adds a clone of shape to the end of this Picture’s linked list.
