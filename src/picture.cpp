@@ -48,6 +48,15 @@ Picture& Picture::operator=(const Picture& other) {
 
 Picture& Picture::operator=(Picture&& other) {
 	if (this != &other) {
+		ListNode* current=head;
+		while(current!=nullptr) {
+		ListNode* toDelete = current;
+		current = current->next;
+		delete toDelete->shape;
+		delete toDelete;
+	}
+
+
 		this->head = other.head;
 		this->tail = other.tail;
 
