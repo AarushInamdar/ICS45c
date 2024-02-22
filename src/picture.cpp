@@ -16,19 +16,34 @@ Picture::Picture(const Picture& other): head(nullptr), tail(nullptr) {
 		}
 }
 
- Picture::Picture(Picture&& other): head(other.head), tail(other.tail) {
+Picture::Picture(Picture&& other): head(other.head), tail(other.tail) {
 	other.head= nullptr;
 	other.tail= nullptr;
 }
 
 // swap this Picture's list with other Picture's list
 void Picture::swap(Picture& other) {
-	
+	/*ListNode* tempHead;
+	ListNode* tempTail;
+
+	tempHead = other.head;
+	tempTail = other.tail;
+
+	other.head = this->head;
+	other.tail = this->tail;
+
+	this->head = tempHead;
+	this->tail = tempTail;i*/
+
+	std::swap(head, other.head);
+	std::swap(tail, other.tail);
 }
 
 // copy and move assignment for Picture (good C++ practice)
 Picture& Picture::operator=(const Picture& other) {
-	
+	Picture temp(other);
+	swap(temp);
+	return *this;
 }
 
 Picture& Picture::operator=(Picture&& other) {
@@ -94,12 +109,15 @@ double Picture::total_area() const {
 
 // frees all storage owned by this Picture when it dies
 Picture::~Picture() {
-	/*ListNode* current=head;
+	ListNode* current=head;
 	while(current!=nullptr) {
 		ListNode* toDelete = current;
 		current = current->next;
 		delete toDelete->shape;
-		delete toDelete;*/
+		delete toDelete;
+	}
+	head = nullptr;
+	tail = nullptr;
 }
 
 
