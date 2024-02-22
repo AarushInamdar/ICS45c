@@ -2,24 +2,28 @@
 #include <iostream>
 #include <numbers>
 
-class Circle {
-public:
-    Circle(Point center, std::string name, int radius){
+Circle::Circle(Point center, std::string name, int radius) :  Shape(center, name), radius(radius) {
 
-    }
+}
 
-    double area() const override{
+double Circle::area() const {
+	return std::numbers::pi * radius *radius;
 
-    }
-    void draw(std::ostream& out) const override{
+}
+void Circle::draw(std::ostream& out) const {
+	for (int y=-radius; y<=radius; y+=2) {
+		for (int x = -radius; x<=radius; ++x) {
+			out << (x*x+y*y<=radius*radius ? '*' :' ');
+			}
+		out<<'\n';
+		}
+	}
 
-    }
-    Circle* clone() const override{
-
-    }
-
-protected:
-    Circle(const Circle& other) = default{
-
-    }
-};
+Circle* Circle::clone() const {
+	return new Circle(*this);
+}
+/*
+Circle::Circle(const Circle& other) : Shape(other), radius(other.radius) {
+	
+}
+*/

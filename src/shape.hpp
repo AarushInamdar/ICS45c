@@ -20,7 +20,7 @@ public:
     void print(std::ostream& out) const;
 
     // delete assignment to prevent accidental slicing
-    Shape& operator=(const Shape& other) = delete;
+    Shape& operator=(const Shape& other);
 
     // computes and returns the area of this Shape
     virtual double area() const = 0;
@@ -33,7 +33,7 @@ public:
     // allocated from the free store
     // must be over-ridden by each concrete class
     // to return a copy of itself
-    virtual Shape* clone() const = 0;
+    virtual Shape* clone() const= 0;
 
     // clean up any sub-storage owned by this Shape object
     virtual ~Shape() = default;

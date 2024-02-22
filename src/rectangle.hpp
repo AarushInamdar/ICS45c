@@ -5,16 +5,16 @@
 
 class Rectangle : public Shape {
 public:
-    Rectangle(Point center, std::string name, int width, int height)
+    Rectangle(Point center, std::string name, int width, int height);
 
-    int area() const override;
+    double area() const ;
 
-    void draw(std::ostream& out) const override;
+    void draw(std::ostream& out) const ;
 
-    Rectangle* clone() const override;
+    Rectangle* clone() const ;
 
 protected:
-    Rectangle(const Circle& other) = default;
+    Rectangle(const Rectangle& other) = default;
 
 private:
     int width;

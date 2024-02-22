@@ -2,26 +2,14 @@
 #include <string>
 #include "picture.hpp"
 #include "circle.hpp"
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "triangle.hpp"
-using namespace std;
 
-int main(int argc, char * argv[])
-{
-    cout << argv[argc-1] << " says Hello World\n";
-}
-/*
-#include <iostream>
-#include <string>
-
-#include "circle.hpp"
-#include "picture.hpp"
 #include "rectangle.hpp"
+
 #include "square.hpp"
 #include "triangle.hpp"
 
 using namespace std;
+
 
 constexpr int N_TESTS = 15;
 constexpr int P1DEFAULT = 2;
@@ -49,6 +37,6 @@ int main(int argc, char** argv) {
     }
     cout << "Total Area = " << collage.total_area() << endl;
     collage.print_all(cout);
-    collage.draw_all(cout);
+    //collage.draw_all(cout);
 }
-*/
+

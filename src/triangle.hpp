@@ -1,11 +1,13 @@
+#ifndef TRIANGLE_HPP
+#define TRIANGLE_HPP
 #include "shape.hpp"
-#include <alogirthm>
+#include <algorithm>
 
 class Triangle: public Shape {
     public:
-    Triangle(Point, center, std::string name, int height, int base);
+    Triangle(Point center, std::string name, int height, int base);
 
-    int area const override;
+    double area() const override;
 
     void draw(std::ostream& out) const override;
 
