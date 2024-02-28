@@ -41,7 +41,7 @@ public:
     // Copy & move assignment (TODO: implement these).
     Array& operator=(const Array& other) {
 		if (this!= &other) {
-			delete buf;
+			delete[] buf;
 			int* newData = new int[other.len];
 			for (int i=0; i<other.len; ++i) {
 			newData[i] = other.buf[i];
@@ -56,7 +56,7 @@ public:
 	
     Array& operator=(Array&& other) noexcept {
 		if (this != &other) {
-		delete buf;
+		delete[] buf;
 		this->buf = other.buf;
 		this->len = other.len;
 
@@ -100,8 +100,7 @@ public:
     // Set every element of the array to 'val'
     // (TODO: implement this).
     void fill(int val) {
-		int curLength = this->length();
-		for (int index = 0; index <= curLength; ++index) {
+		for (int index = 0; index<len; ++index) {
 			buf[index] = val;
 		}
 	}
