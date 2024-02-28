@@ -15,8 +15,20 @@ public:
     explicit Array(int len) : len(len), buf(new int[len]) {}
 
     // Copy & move constructors (TODO: implement these).
-    Array(const Array& other);
-    Array(Array&& other) noexcept;
+    Array(const Array& other): buf(new int[other.len]) {
+		for (int i=0; i<other.len; ++i) {
+			buf[i] = other.buf[i];
+		}
+		len = other.len;
+	}
+
+    Array(Array&& other) {
+		buf = other.buf;
+		other.buf = nullptr;
+
+		len = other.len;
+		other.len = 0;
+	}
 
     // Swap two arrays (without allocations).
     // Note: now a friend function,
@@ -27,13 +39,38 @@ public:
     }
 
     // Copy & move assignment (TODO: implement these).
-    Array& operator=(const Array& other);
-    Array& operator=(Array&& other) noexcept;
+    Array& operator=(const Array& other) {
+		if (this!= &other) {
+			delete buf;
+			int* newData = new int[other.len];
+			for (int i=0; i<other.len; ++i) {
+			newData[i] = other.buf[i];
+			}
+			this->buf = newData;
+			this->len = other.len;
+
+			}
+		return *this;
+		}
+
+	
+    Array& operator=(Array&& other) noexcept {
+		if (this != &other) {
+		delete buf;
+		this->buf = other.buf;
+		this->len = other.len;
+
+		other.buf = nullptr;
+		other.len = 0;
+		}
+
+		return *this;
+	}
 
     // Destructor
     ~Array() {
-        // TODO: implement this
-    }
+    	delete[] buf;
+		}
 
     // Get the length of the array.
     int length() const {
@@ -43,19 +80,31 @@ public:
     // Get a particular element of the array
     // (TODO: add bounds check).
     int& operator[](int index) {
-        return buf[index];
+		if (!in_bounds(index)) {
+			throw "Exception operator[](" + std::to_string(index) + ") Out Of Range";
+		}
+		return buf[index];
+
     }
 
     // Get a particular element of the array
     // (TODO: add bounds check).
     const int& operator[](int index) const {
-        return buf[index];
+		if (!in_bounds(index)) {
+			throw "Exception operator[](" + std::to_string(index) + ") Out Of Range";
+		}
+		return buf[index];
+
     }
 
     // Set every element of the array to 'val'
     // (TODO: implement this).
-    void fill(int val);
-
+    void fill(int val) {
+		int curLength = this->length();
+		for (int index = 0; index <= curLength; ++index) {
+			buf[index] = val;
+		}
+	}
 private:
     int len;
     int* buf;
