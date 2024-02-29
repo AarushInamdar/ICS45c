@@ -91,6 +91,16 @@ std::ostream& operator<<(std::ostream& out, const Matrix<T>& matrix) {
 //      4 5 6
 // for a 2-row, 3-column matrix.
 template <typename T>
-std::istream& operator>>(std::istream& in, Matrix<T>& matrix);
+std::istream& operator>>(std::istream& in, Matrix<T>& matrix){
+	T value;
+	for (int i=0; i<matrix.num_rows(); ++i) {
+		for (int c=0; c<matrix.num_cols(); ++c) {
+			if (in >> value) {
+				matrix[i][c] = value;
+			}
+		}
+	}
+	return in;
+}
 
 #endif
