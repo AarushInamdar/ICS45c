@@ -20,22 +20,22 @@ public:
 
     // Get a particular row of the matrix.
     Array<T>& operator[](int row) {
-		try {
+		/*try {
 			return data[row];
 		} catch(std::string s) {
 			std::cerr << s << std::endl;
-			return data[0];
-		}
+		}*/
+		return data[row];
 	}
 		
 
 	const Array<T>& operator[](int row) const {
-		try {
+		/*try {
 			return data[row];
 		} catch(std::string s) {
 			std::cerr << s << std::endl;
-			return data[0];
-		}
+		}*/
+		return data[row];
 	}
 
     // Get number of rows / columns
