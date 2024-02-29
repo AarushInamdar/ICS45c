@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& out, const Matrix<T>& matrix) {
 			for (int c = 0; c<matrix.num_cols(); ++c) {
 				out << matrix[r][c];
 			}
-			out << endl;
+			out << std::endl;
 		}
 		return out;
 	}
