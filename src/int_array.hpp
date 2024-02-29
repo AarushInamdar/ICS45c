@@ -14,7 +14,6 @@ public:
     // Construct array of given length.
     explicit Array(int len) : len(len), buf(new int[len]) {}
 
-    // Copy & move constructors (TODO: implement these).
     Array(const Array& other): buf(new int[other.len]) {
 		for (int i=0; i<other.len; ++i) {
 			buf[i] = other.buf[i];
@@ -38,7 +37,6 @@ public:
         std::swap(lhs.buf, rhs.buf);
     }
 
-    // Copy & move assignment (TODO: implement these).
     Array& operator=(const Array& other) {
 		if (this!= &other) {
 			delete[] buf;
@@ -78,7 +76,6 @@ public:
     }
 
     // Get a particular element of the array
-    // (TODO: add bounds check).
     int& operator[](int index) {
 		if (!in_bounds(index)) {
 			throw "Exception operator[](" + std::to_string(index) + ") Out Of Range";
@@ -88,7 +85,6 @@ public:
     }
 
     // Get a particular element of the array
-    // (TODO: add bounds check).
     const int& operator[](int index) const {
 		if (!in_bounds(index)) {
 			throw "Exception operator[](" + std::to_string(index) + ") Out Of Range";
@@ -98,7 +94,6 @@ public:
     }
 
     // Set every element of the array to 'val'
-    // (TODO: implement this).
     void fill(int val) {
 		for (int index = 0; index<len; ++index) {
 			buf[index] = val;
