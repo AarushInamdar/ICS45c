@@ -79,7 +79,7 @@ template <typename T>
 std::ostream& operator<<(std::ostream& out, const Matrix<T>& matrix) {
 	for (int r = 0; r<matrix.num_rows(); ++r) {
 			for (int c = 0; c<matrix.num_cols(); ++c) {
-				out << matrix[r][c] << ' ';
+				out << matrix[r][c] << std::endl;
 			}
 			out << '\n';
 		}
