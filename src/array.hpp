@@ -97,6 +97,12 @@ public:
 
     }
 
+	void fill(T f) {
+		for (int i=0; i < len; ++i) {
+			buf[i] = f;
+		}
+	}
+
     // Fill array by setting every entry `i` to `fn(i)`.
     template <typename Fn>
     void fill_with_fn(Fn fn) {
