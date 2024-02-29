@@ -24,6 +24,7 @@ public:
 			return data[row];
 		} catch(std::string s) {
 			std::cerr << s << std::endl;
+			return data[0];
 		}
 	}
 		
@@ -33,6 +34,7 @@ public:
 			return data[row];
 		} catch(std::string s) {
 			std::cerr << s << std::endl;
+			return data[0];
 		}
 	}
 
