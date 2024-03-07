@@ -6,9 +6,8 @@
 #include "process_numbers.hpp"
 
 
-
 void split_odd_even(std::istream& numbers, std::ostream& odds, std::ostream& evens) {
-
+	
 	std::vector<int> allNumbers{std::istream_iterator<int>(numbers), std::istream_iterator<int>()};
 
 	std::sort(allNumbers.begin(), allNumbers.end());
