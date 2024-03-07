@@ -17,7 +17,7 @@ std::set<std::string> load_stopwords(std::istream& stopwords) {
 	std::set<std::string> stopwordsSet;
 	std::string word;
 
-	while (stopwords >> word) {
+	for (;stopwords >> word;) {
 		stopwordsSet.insert(to_lowercase(word));
 	}
 	
@@ -31,7 +31,7 @@ std::map<std::string, int> count_words(std::istream& document, const std::set<st
 	std::vector<std::string> allWords;
 	std::string word;
 
-	while (document >> word) {
+	for (;document >> word;) {
 		allWords.push_back(to_lowercase(word));
 	}
 	std::sort(allWords.begin(), allWords.end());
