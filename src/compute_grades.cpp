@@ -30,7 +30,7 @@ void Student::validate() const {
 
 }
 
-std::strong_ordering Student operator<=>(Student const&) const {
+std::strong_ordering Student::operator<=>(Student const&) const {
 	
 }
 
