@@ -65,6 +65,7 @@ std::istream& operator>>(std::istream& in, Student& s) {
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
 	out << std::left << std::setw(8) << "Name:" << s.first_name << " " << s.last_name << "\n"<< std::setw(8) <<"HW Ave:" << std::fixed << std::setprecision(2) << s.hw_avg << "\n" <<std::setw(8) << "QZ Ave: " << std::fixed << std::setprecision(2) <<s.quiz_avg << "\n" <<std::setw(8) << "Final:" << s.final_score << "\n" << std::setw(8) <<"Total:" << s.course_score << "\n" << std::setw(8) << "Grade:" << s.course_grade << "\n" << "\n";
+	std::cout << "Operator << is logged for Student class\n";
 	return out;
 }
 
@@ -173,9 +174,11 @@ std::istream& operator>>(std::istream& in, Gradebook& g ) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& g) {
-	std::for_each(g.students.begin(), g.students.end(), [&out](const Student& student) {
-		out << student;
-	});
+	for (const Student& s : g.students) {
+		std::cout << "logging for student " << std::endl;
+		out << s;
+	}
+	;
 	return out;
 }
 
