@@ -76,7 +76,7 @@ void Student::compute_quiz_avg() {
 
 	int minEl = -1;
 
-	if (pluralScores {
+	if (pluralScores) {
 		minEl = this->quiz[0];
 		std::for_each(this->quiz.begin(),this->quiz.end(), [&] (int q) {if (minEl >= q) {
 			minEl = q;
@@ -94,7 +94,7 @@ void Student::compute_quiz_avg() {
 	if(pluralScores){
 		this->quiz_avg = currSum/(this->quiz.size() - 1);
 	}else{
-		this->quiz_avg = currSum(this->quiz.size();
+		this->quiz_avg = currSum/this->quiz.size();
 	}
 }
 
@@ -148,6 +148,18 @@ void Student::compute_grade() {
 
 }
 
+
+void Gradebook::compute_grades(){
+
+}
+
+void Gradebook::sort(){
+
+}
+
+void Gradebook::validate() const{
+
+}
 
 std::istream& operator>>(std::istream& in, Gradebook& g ) {
 	while (in.peek() !=EOF) {
