@@ -33,7 +33,15 @@ void Student::validate() const {
 std::strong_ordering Student::operator<=>(Student const& other) const {
 	if (this->course_score > other.course_score) {
 		return std::strong_ordering::greater;
-	} else {
+	} else if (this->course_score < other.course_score) {
+		return std::strong_ordering::less;
+	} else if (this->first_name > other.first_name) {
+		return std::strong_ordering::greater;
+	} else if (this->first_name < other.first_name) {
+		return std::strong_ordering::less;
+	} else if (this->last_name > other.last_name) {
+		return std::strong_ordering::greater;
+	} else  {
 		return std::strong_ordering::less;
 	}
 }
