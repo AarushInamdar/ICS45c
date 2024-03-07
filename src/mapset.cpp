@@ -15,11 +15,8 @@ std::string to_lowercase(const std::string& str) {
 std::set<std::string> load_stopwords(std::istream& stopwords) {
 	
 	std::set<std::string> stopwordsSet;
-	std::string word;
-
-	for (;stopwords >> word;) {
-		stopwordsSet.insert(to_lowercase(word));
-	}
+	
+	std::for_each(std::istream_iterator<std::string>(stopwords), std::istream_iterator<std::string>(), [&stopwordsSet](const std::string& word) {stopwordsSet.insert(to_lowercase(word));});
 	
 	return stopwordsSet;
 
@@ -31,9 +28,9 @@ std::map<std::string, int> count_words(std::istream& document, const std::set<st
 	std::vector<std::string> allWords;
 	std::string word;
 
-	for (;document >> word;) {
-		allWords.push_back(to_lowercase(word));
-	}
+
+	std::for_each(std::istream_iterator<std::string>(document), std::istream_iterator<std::string>(), [&allWords](const std::string& word) {allWords.push_back(to_lowercase(word));});
+	
 	std::sort(allWords.begin(), allWords.end());
 
 	for (auto& word : allWords) {
