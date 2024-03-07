@@ -30,8 +30,14 @@ void Student::validate() const {
 
 }
 
-std::strong_ordering Student::operator<=>(Student const&) const {
-	
+std::strong_ordering Student::operator<=>(Student const& other) const {
+	if (this->course_score == other.course_score) {
+		return std::strong_ordering::equivalent;
+	} else if (this->course_score > other.course_score) {
+		return std::strong_ordering::greater;
+	} else {
+		return std::strong_ordering::less;
+	}
 }
 
 bool Student::operator==(const Student& other) const {
