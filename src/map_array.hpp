@@ -16,10 +16,9 @@ public:
         using iterator_category = ???;
         using value_type = ???;
         using difference_type = ???;
-        using pointer = ???;
-        using reference = ???;
-
-        explicit ArrayIterator(std::pair<Key, Value>* ptr = nullptr);
+        using pointer = std::pair<Key, Value>*;
+        using reference = std::pair<Key, Value>*&;
+        explicit ArrayIterator(std::pair<Key, Value>* ptr = nullptr) ptr(ptr) {}
 
         ArrayIterator& operator++();
         ArrayIterator& operator--();

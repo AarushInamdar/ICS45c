@@ -17,19 +17,38 @@ class SetList {
 public:
     class ListIterator {
     public:
-        using iterator_category = ???;
-        using value_type = ???;
-        using difference_type = ???;
-        using pointer = ???;
-        using reference = ???;
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = T;
+        using difference_type = std::ptrdiff_t;
+        using pointer = T*;
+        using reference = T&;
 
-        explicit ListIterator(std::shared_ptr<ListNode> ptr = nullptr);
+        explicit ListIterator(std::shared_ptr<ListNode> ptr = nullptr) ptr(ptr) {}
 
-        ListIterator& operator++();
-        ListIterator operator++(int);
-        T& operator*() const;
-        T* operator->() const;
-        bool operator==(const ListIterator& other) const = default;
+        ListIterator& operator++() {
+			if (ptr) {
+				ptr = ptr->next;
+			}
+			return *this;
+		}
+        
+		ListIterator operator++(int) {
+			ListIterator tmp = *this;
+			++(*this);
+			return tmp;
+		}
+
+        T& operator*() const {
+			return *(ptr->value);
+		}
+
+        T* operator->() const {
+			return &(ptr->value);
+		}
+
+        bool operator==(const ListIterator& other) const = default {
+			return (ptr == other.ptr);
+		}
 
     private:
         std::shared_ptr<ListNode> ptr;
@@ -47,10 +66,48 @@ public:
                               std::bind_front(&SetList::insert, this));
     }
 
-    ListIterator begin();
-    ListIterator end();
-    bool contains(const T& value);
-    ListIterator insert(T value);
+    ListIterator begin() {
+		return ListIterator(head);
+	}
+
+    ListIterator end() {
+		return ListIterator(nullptr);
+	}
+    bool contains(const T& value) {
+		std::shared_ptr<ListNode> curr = head;
+		while (curr!=nullptr) {
+			if (curr->value == value) {
+				return true;
+			}
+			curr = curr->next;
+		}
+		return false;
+	}
+
+    ListIterator insert(T value) {
+		if contains(value) {
+			return end();
+			}
+
+		auto NewNode = std::make_shared<ListNode>(value);
+		
+		if (!head || value < head->value) {
+			NewNode->next = head;
+			head = NewNode;
+			return ListIterator(NewNode);
+		} 
+
+		std::shared_ptr<ListNode> curr = head;
+		
+		while (curr->next != nullptr && !(value< current->next->value)) {
+			curr = curr->next;
+		}
+		NewNode->next = curr->next;
+		curr->next = NewNode
+
+		return ListNode(NewNode);
+
+	}
 
 private:
     std::shared_ptr<ListNode> head = nullptr;
