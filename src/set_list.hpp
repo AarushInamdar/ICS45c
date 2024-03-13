@@ -89,12 +89,12 @@ public:
 			return end();
 			}
 
-		auto NewNode = std::make_shared<ListNode>(value);
+		auto NewNode = std::make_shared<ListNode>(std::move(value));
 		
 		//if (!head || value < head->data) {
-			NewNode->next = head;
-			head = NewNode;
-			return ListIterator(NewNode);
+		NewNode->next = head;
+		head = NewNode;
+		return ListIterator(NewNode);
 		//} 
 		/*
 		std::shared_ptr<ListNode> curr = head;
