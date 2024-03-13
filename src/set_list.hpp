@@ -23,7 +23,7 @@ public:
         using pointer = T*;
         using reference = T&;
 
-        explicit ListIterator(std::shared_ptr<ListNode> ptr = nullptr) ptr(ptr) {}
+        explicit ListIterator(std::shared_ptr<ListNode> ptr = nullptr) : ptr(ptr) {}
 
         ListIterator& operator++() {
 			if (ptr) {
@@ -39,16 +39,16 @@ public:
 		}
 
         T& operator*() const {
-			return *(ptr->value);
+			return (ptr->data);
 		}
 
         T* operator->() const {
-			return &(ptr->value);
+			return &(ptr->data);
 		}
 
-        bool operator==(const ListIterator& other) const = default {
+        bool operator==(const ListIterator& other) const = default;/* {
 			return (ptr == other.ptr);
-		}
+		}*/
 
     private:
         std::shared_ptr<ListNode> ptr;
@@ -76,7 +76,7 @@ public:
     bool contains(const T& value) {
 		std::shared_ptr<ListNode> curr = head;
 		while (curr!=nullptr) {
-			if (curr->value == value) {
+			if (curr->data == value) {
 				return true;
 			}
 			curr = curr->next;
@@ -85,28 +85,28 @@ public:
 	}
 
     ListIterator insert(T value) {
-		if contains(value) {
+		if (contains(value)) {
 			return end();
 			}
 
 		auto NewNode = std::make_shared<ListNode>(value);
 		
-		if (!head || value < head->value) {
+		//if (!head || value < head->data) {
 			NewNode->next = head;
 			head = NewNode;
 			return ListIterator(NewNode);
-		} 
-
+		//} 
+		/*
 		std::shared_ptr<ListNode> curr = head;
 		
-		while (curr->next != nullptr && !(value< current->next->value)) {
+		while (curr->next != nullptr && !(value< curr->next->data)) {
 			curr = curr->next;
 		}
 		NewNode->next = curr->next;
-		curr->next = NewNode
+		curr->next = NewNode;
 
-		return ListNode(NewNode);
-
+		return ListIterator(NewNode);
+		*/
 	}
 
 private:
