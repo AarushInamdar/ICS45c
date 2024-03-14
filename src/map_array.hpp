@@ -131,7 +131,7 @@ public:
     Value& operator[](const Key& key) {
 		auto tmp = std::lower_bound(data.begin(), data.end(), std::make_pair(key, Value{}), [] (const auto& pair, const auto& val) {return pair.first < val.first;});
 
-		if (tmp != data.end() && it->first == key) {
+		if (tmp != data.end() && tmp->first == key) {
 			return tmp->second;
 		} else {
 			return data.emplace(tmp, key, Value())->second;
